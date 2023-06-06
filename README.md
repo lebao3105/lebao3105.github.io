@@ -8,7 +8,7 @@ Then you can go offline:)
 
 "cd" to the cloned repository, run:
 ```bash
-$ pelican content # Usually everything is up-to-date, run this will (re)generate all web pages
+$ pelican content
 $ pelican --listen
 ```
 

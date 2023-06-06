@@ -8,13 +8,6 @@ TIMEZONE = 'Asia/Bangkok'
 
 DEFAULT_LANG = 'en'
 
-# Feed generation is usually not desired when developing
-FEED_ALL_ATOM = False
-CATEGORY_FEED_ATOM = False
-TRANSLATION_FEED_ATOM = False
-AUTHOR_FEED_ATOM = False
-AUTHOR_FEED_RSS = False
-
 # Blogroll
 LINKS = (
     ('Pelican', 'https://getpelican.com/'),
@@ -27,7 +20,8 @@ LINKS = (
 # Social widget
 SOCIAL = (
     ('Twitter', 'https://twitter.com/lebao_roofs'),
-    ('Youtube', 'https://www.youtube.com/channel/UCG3Mq4Pnu9hxasXCht6k2rw')
+    ('Youtube', 'https://www.youtube.com/channel/UCG3Mq4Pnu9hxasXCht6k2rw'),
+    ('Discord (no link but my acc name instead)', 'lebao12#4008')
 )
 
 DEFAULT_PAGINATION = 5
