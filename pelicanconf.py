@@ -20,8 +20,7 @@ LINKS = (
 # Social widget
 SOCIAL = (
     ('Twitter', 'https://twitter.com/lebao_roofs'),
-    ('Youtube', 'https://www.youtube.com/channel/UCG3Mq4Pnu9hxasXCht6k2rw'),
-    ('Discord (no link but my acc name instead)', 'lebao12#4008')
+    ('Youtube', 'https://www.youtube.com/channel/UCG3Mq4Pnu9hxasXCht6k2rw')
 )
 
 DEFAULT_PAGINATION = 5
