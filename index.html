@@ -1,0 +1,72 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lebao3105's website</title>
+    <link href="./style/style.css" rel="stylesheet">
+
+    <script>
+        window.onload = function() {
+            var pageloc = window.location.pathname;
+            pageloc = pageloc.replace(new RegExp("/", "g"), " / ").replace(".html", "");
+            document.getElementById("path").innerText = pageloc;
+        }
+    </script>
+</head>
+
+<body>
+    <label id="path"></label>
+
+    <h6 class="title">lebao3105's website</h6>
+    <h1>welcome+about me</h1>
+
+    <p>
+        Hi and welcome to lebao3105.github.io!<br>
+        This website has many things about technology, normal life etc. Tutorials exist too.
+    </p>
+
+    <p>
+        I'm Le Bao Nguyen (Nguyen is the last name), a student+developer from Viet Nam.<br>
+        I'm 16 this year, born in Ha Noi.<br>
+
+        Probably I can just tell you to open my GitHub profile and read what do you see, but no. Let me introduce myself (once again):
+
+        <ul>
+            <li>I have my own interests in technology things, e.g operating systems (OSes), programming languages, hardware.</li>
+            <li>I also like to learn things new not only in technology scope!</li>
+            <li>Music is a friend:-)</li>
+            <li>I'm still too young to have a full opinion about politics, don't ask me anything about that. I will keep myself not far from the truth.</li>
+            <li>I don't like how 3D take over our life. Or more accurate, how people abuse 3D: Reddit logo is an example. Also Microsoft products (Windows is only fine with a bunch of patches in order to now slow)</li>
+            <li>I don't do much sports though...</li>
+            <li>And why I use dotted list like that?</li>
+        </ul>
+    </p>
+
+    <p>So what do we have here?</p>
+    <p>Not only things I have said above (the very first paragraph), but if you look at my GitHub + GitLab, there are many projects I think you may be interested in!
+        For example:
+        <ul>
+            <li>TextWorker: A text editor that I want to make it an expandable IDE. Almost 3 years for it to be... rewritten in C++.</li>
+            <li>FPOS: The Free Pascal Operating System. I just have been invited to the development. No actual work from now except the next project I will tell you.</li>
+            <li>FPSH: Free Pascal Shell. This is NOT an interperter, mainly made for FPOS but you can use it in your OS.</li>
+            <li>And many more, from open to archived.</li>
+        </ul>
+    </p>
+
+    <p>Hard coded page links:
+        <ul>
+            <li><a href="content/tutorials/wxWidgets_WindowsCmake.html">How to install wxWidgets on Windows with CMake</a></li>
+            <li><a href="content/updates/duckstation.html">The first build of DuckStation is out (it's a year since that lol)</a></li>
+            <li><a href="content/updates/texteditor_tk_update.html">Tkinter deprecation in TextWorker</a></li>
+        </ul>
+    </p>
+
+    <p>
+        There are so many things need to be completed for this website... RSS is an example.<br>
+        If you found any weird things, you can notify me via email/Twitter (on Twitter no DM please), or GitHub Issues. This helps me a lot!
+        <br>
+        And finally... thank you guys a lot for viewing/reading my website! Have a good day🤗🤗🤗!
+    </p>
+
+    <iframe src="../../style/footer.html" width="100%" frameborder="0" scolling="no"></iframe>  
+</body>
