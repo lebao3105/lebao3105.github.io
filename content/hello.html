@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First notes</title>
+    <link href="../style/style.css" rel="stylesheet">
+
+    <script>
+        window.onload = function() {
+            var pageloc = window.location.pathname;
+            pageloc = pageloc.replace(new RegExp("/", "g"), " / ").replace(".html", "");
+            document.getElementById("path").innerText = pageloc;
+        }
+    </script>
+</head>
+
+<body>
+    <!-- <iframe src="../style/header.html" width="100%" frameborder="0" scolling="no"></iframe> -->
+
+    <label id="path"></label>
+
+    <h6 class="title">lebao3105's website</h6>
+    <h1>welcome</h1>
+        
+    <h4>a message from @lebao3105</h4>
+    
+    <p>Hi everyone!</p>
+    
+    <p>
+        It's a long time since my last GitHub Page version, built on top of Jenkyll. Now it's still a GitHub Page, but with pure HTML and CSS!
+        Sounds good right?<br>
+        This page is made with the style of Windows Phone 8.1 - this <a href="https://wp-store.neocities.org/xaps">page</a> gave me the idea! Mix it with my liking.<br>
+        Currently the page is being ported to HTML from Markdown. But the content won't be changed:
+        <ul>
+            <li>Tutorials</li>
+            <li>Updates, from my projects to outside ones</li>
+            <li>My profile (even though I can just leave my GitHub profile here and tell you click it lol)</li>
+            <li>My projects</li>
+        </ul>
+    </p>
+    
+    <p>Everything will be published to <code class="inline-code">lebao3105.github.io</code> as usual.</p>
+    
+    <h4>one more thing...</h4>
+    
+    <p>
+        This is just a place filler on the home page. Nothing more, nothing less.
+    
+        If you found any weird things, you can notify me via email/Twitter (on Twitter no DM please), or GitHub Issues. This helps me a lot!
+    
+        And finally... thank you guys a lot for viewing/reading my website! Have a good day🤗🤗🤗!
+    </p>
+
+    <iframe src="../style/footer.html" width="100%" frameborder="0" scrolling="no"></iframe>
+</body>
+
+</html>

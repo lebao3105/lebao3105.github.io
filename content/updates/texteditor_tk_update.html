@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tkinter deprecation on Textworker</title>
+    <link href="../../style/style.css" rel="stylesheet">
+
+    <script>
+        window.onload = function() {
+            var pageloc = window.location.pathname;
+            pageloc = pageloc.replace(new RegExp("/", "g"), " / ").replace(".html", "");
+            document.getElementById("path").innerText = pageloc;
+            document.getElementById("path").setAttribute("href", document.URL + "/../");
+        }
+    </script>
+</head>
+
+<body>
+    <label id="path"></label>
+
+    <h6 class="title">Category: Updates</h6>
+    <h6 class="title">Last modified: 2024-04-14 17:17</h6>
+
+    <h1>New status of the texteditor project (with Tkinter)</h1>
+    
+    <h4>What happened?</h4>
+    <p>
+        <code class="inline-code">texteditor</code> has started using wxPython at the end of 2022.
+
+        <a href="https://wxPython.org">wxPython</a> is the Python binding of <a href="https://wxwidgets.org">wxWidgets</a> -
+        a GUI toolkit which brings us the native OS's look (since wxWidgets is the binding of the OS's native/choosen GUI), plus some handmade things.
+
+        This marks my higher step in my programming skill, with more organized, optimized code.
+    </p>
+
+    <h4>How about Tkinter? And what's next?</h4>
+    <p>
+        Tkinter UI is ugly in non-Windows/macOS, due to how Tcl that Tkinter based on - works. However it's much more better at customizing the interface than wx*.
+        <br>
+        However, wx still has so many goods than Tkinter, also easier to do basic things like bind events, place things.
+        <br>
+        Texteditor (now Textworker) will stop using Tkinter after the ongoing 1.5 release.
+        <br>
+        I really can't work on 2 different versions of a project like that. Porting new changegs together? We have <code>libtextworker</code> and
+        <a href="https://gitlab.com/textworker/Assets">Assets</a> repo.
+        <br>
+        Tkinter is the first thing people think about when they start making their first GUI Python apps. It's fast, easy to learn and use... And most people use Windows - where Tcl doesn't have issues about.
+    </p>
+
+    <iframe src="../../style/footer.html" width="100%" frameborder="0" scolling="no"></iframe>
+</body>

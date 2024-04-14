@@ -1,0 +1,103 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The first DuckStation build</title>
+    <link href="../../style/style.css" rel="stylesheet">
+
+    <script>
+        window.onload = function() {
+            var pageloc = window.location.pathname;
+            pageloc = pageloc.replace(new RegExp("/", "g"), " / ").replace(".html", "");
+            document.getElementById("path").innerText = pageloc;
+            document.getElementById("path").setAttribute("href", document.URL + "/../");
+        }
+    </script>
+</head>
+
+<body>
+    <!-- <iframe src="../../style/header.html" width="100%" frameborder="0" scolling="no"></iframe> -->
+
+    <a id="path"></a>
+
+    <h6 class="title">Category: Updates</h6>
+    <h6 class="title">Date: 2023-09-02 08:58</h6>
+    
+    <h1>The first DuckStation build is out</h1>
+
+    <h4>What happened?</h4>
+
+    <p>
+        Yesterday (in my country), Bashar Astifan - one of the Windows Universal Tool (WUT or W.U.T for short), has released the first build (also a small update today) of the PlayStation 1 emulator DuckStation for Windows 10 Mobile.
+    </p>
+
+    <h4>What is DuckStation?</h4>
+    <p>
+        Above: a PlayStation 1 emulator, focusing on playability, performance, and long-term maintainable.
+
+        It is originally made by <a href="https://github.com/stenzek/duckstation">Connor McLaughlin</a>, and the original version still lives & being developed until now.
+
+        DuckStation, like many other emulators, uses "BIOS" ROM images to start emulator and play games, which requires you to find from your console or somewhere else (legal reasons).
+
+        It has:
+        
+        <ul>
+            <li>CPU Recompiler/JIT (x86_64, armv7, AArch32 and 64)</li>
+
+            <li>Skip BIOS splash/intro: "Fast boot"</li>
+
+            <li>Windows - macOS - Linux support</li>
+
+            <li>Namco GunCon, NeGCon support.</li>
+
+            <li>Emulated CPU overclock.</li>
+        </ul>
+    </p>
+
+    <p>
+        And more on its <a href="https://github.com/stenzek/duckstation">GitHub</a>.
+    </p>
+
+    <h4>What about the W10M port?</h4>
+    <p>
+        It's the unofficial port by <a href="https://github.com/basharst">Bashar Astifan</a>, who also made many things about emulators.
+
+        From Windows 10 Mobile Telegram group, or his GitHub, this is the updates from the original one:
+
+        <ul>
+            <li>UWP Storage <a href="https://github.com/basharast/UWP2Win32">solution</a> - Root access required to make the files load faster</li>
+
+            <li>Custom data folder</li>
+
+            <li>Improved touch screen functions</li>
+
+            <li>Added On-Screen touch controller</li>
+
+            <li>Improved files browser</li>
+
+            <li>Fixed few issues with retroachivements</li>
+
+            <li>Launch by file or URI</li>
+        </ul>
+    
+    </p>
+
+    <p>
+        Universal Windows Platform of course. In fact, the original developer has made his first UWP support for this, but dropped.
+
+        This port is for Windows ARM32, min 15035. 14393 and DirectX 11 Feature Level 9.3 are nor ready yet (Level 10+ is supported).
+
+        The latest available version is 1.0.1 with small fixes.
+    </p>
+
+    <h4>Where to get</h4>
+    <p>
+        This <a href="https://github.com/basharast/DuckStation-UWP-ARM/releases">page</a>.
+
+        Note from Bashar: Reduce Overclocking value may help improve performance for weak GPUs - if you have enabled it - but don't reduce too much. Also disabling Scaled Dithering could help.
+
+        Enjoy!
+    </p>
+
+    <iframe src="../../style/footer.html" width="100%" frameborder="0" scolling="no"></iframe>
+</body>

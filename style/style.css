@@ -1,0 +1,59 @@
+* {
+    font-family: 'Segoe UI';
+    background-color: black;
+    color: white;
+    margin: 20px;
+    font-weight: 100;
+    font-size: 20px;
+}
+
+/* H1 = header */
+h1 {
+    font-size: 60px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+/* Section */
+h3 { font-size: 50px; }
+
+h4 { font-size: 40px; }
+
+h5 { font-size: 30px; }
+
+h6 { font-size: 20px; }
+
+/* Website title */
+.title {
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    color: darkgray;
+}
+
+/* Inline code block */
+.inline-code {
+    padding: 2px 2px;
+    background-color: rgba(70, 70, 70, 0.555);
+    border: 1px solid transparent;
+    border-radius: 3px;
+    font-family: 'Consolas', monospace;
+}
+
+a:not(#path), i, code {
+    margin: 0px 0px;
+}
+
+/* Footer */
+footer {
+    left: 0;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    text-align: center;
+}
+
+/* iframe are now used to place header and footer. */
+iframe {
+    margin: 0;
+}

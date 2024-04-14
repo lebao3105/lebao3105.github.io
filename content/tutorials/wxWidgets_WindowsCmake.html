@@ -1,0 +1,87 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building wxWidgets with CMake on Windows</title>
+    <link href="../../style/style.css" rel="stylesheet">
+
+    <script>
+        window.onload = function() {
+            var pageloc = window.location.pathname;
+            pageloc = pageloc.replace(new RegExp("/", "g"), " / ").replace(".html", "");
+            document.getElementById("path").innerText = pageloc;
+            document.getElementById("path").setAttribute("href", document.URL + "/../");
+        }
+    </script>
+</head>
+
+<body>
+    <a id="path"></a>
+
+    <h6 class="title">Category: Development</h6>
+    <h6 class="title">Last modified: 2024-04-14 18:05</h6>
+
+    <h1>How to build wxWidgets from source code on Windows with CMake</h1>
+
+    <h4>Introducion</h4>
+    <p>
+        wxWidgets is a C++ library for cross-platform GUI apps. It calls operating systems's native/choosen controls (Win32, GTK, Qt, Cocoa).<br>
+
+        Because wxWidgets depends on GUI libraries which are likely not installed in your computer (development files), the build and installation will not take a short while.<br>
+
+        If you stop here after reading the sentence above, install precompiled library <a href="https://wxwidgets.org/download">here</a>.<br>
+
+        Else continue.
+    </p>
+
+    <h4>Prepare</h4>
+    <p>
+        You will need:
+
+        <ul>
+            <li>C++ compiler</li>
+            <li>CMake and other <a href="https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html#command-line-build-tool-generators">supported</a> build system (Make, Ninja) since CMake will generate files to one of them</li>
+            <li>Windows SDK, of course.</li>
+            <li>Time</li>
+            <li>Git</li>
+        </ul>
+
+        <p>
+            It's the best to just install Visual Studio and start Developer Command Prompt.<br>
+            All external tools must be added to <code class="inline-code">%PATH%</code>.
+        </p>
+    </p>
+
+    <p>
+        You also need to set these variables:
+        <ul>
+            <li><code class="inline-code">%WXWIN%</code>: Where to install wxWidgets</li>
+            <li><code class="inline-code">%WXCFG%</code>: Relative path to <code class="inline-code">build.cfg</code> file (start from <code class="inline-code">%WXWIN%</code>). Use the one matching your target build type (static, shared) and computer architecture.</li>
+            <li><code class="inline-code">%ARCH%</code>: Target build architecture</li>
+        </ul>
+    </p>
+
+    <h4>Bake the cake!</h4>
+    <p>
+        1. Start (Developer) Command Prompt with all needed tools are in <code class="inline-code">%PATH%</code>.<br><br>
+        2. <code class="inline-code">cd</code> to where to clone the project. Clone wxWidgets with <code class="inline-code">--recursive</code> flag.<br><br>
+        3. <code class="inline-code">cd</code> to the source code directory.<br><br>
+        4. Run:<br>
+        <ol>
+            <li>md build</li>
+            <li>cd build</li>
+            <li>cmake -G [generator] .. -DCMAKE_INSTALL_PREFIX=%WXWIN% -DCMAKE_GENERATOR_PLATFORM=%ARCH%</li>
+            <li>cmake --build . --target install</li>
+        </ol>
+
+        <p>
+            That's all! Now wait to the build and installation to finish.<br>
+            
+            Use <a href="https://github.com/kowey/wx-config-win">wx-config-win</a> to test if your installation works.<br>
+
+            Enjoy!
+        </p>
+    </p>
+
+    <iframe src="../../style/footer.html" width="100%" frameborder="0" scolling="no"></iframe>
+</body>
