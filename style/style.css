@@ -72,3 +72,8 @@ footer {
 iframe {
     margin: 0;
 }
+
+bold {
+    margin: 0;
+    font-weight: bold;
+}

@@ -1,0 +1,37 @@
+/* NOTE: The style below has partially copied into content/getAllPosts.js,
+   as I do not know how to get these styles below from JS. So there and here
+   should have the same card style. */
+
+.card
+{
+    border-radius: 0px;
+    border: 1px solid transparent;
+
+    width: 300px;
+    max-width: 500px;
+    height: 300px;
+    max-width: 500px;
+
+    padding-left: 10px;
+
+    background-color: lightgray;
+
+    cursor: pointer;
+}
+
+.card-project
+{
+    height: 100px;
+    max-height: 150px;
+
+    width: auto;
+}
+
+.grid
+{
+    display: grid;
+    column-gap: 20px;
+    row-gap: 20px;
+    column-count: 3;
+    grid-template-columns: auto auto auto;
+}
