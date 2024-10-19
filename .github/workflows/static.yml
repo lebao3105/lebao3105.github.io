@@ -36,8 +36,8 @@ jobs:
       - name: Setup Pages
         run: |
           mkdir _site
-          mv -r content _site
-          mv -r style _site
+          mv content _site
+          mv  style _site
           mv index.html _site
 
       - name: Setup Pages (part 2)
