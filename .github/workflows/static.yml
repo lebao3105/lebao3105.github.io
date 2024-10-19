@@ -35,10 +35,10 @@ jobs:
 
       - name: Setup Pages
         run: |
-          - mkdir _site
-          - mv -r content _site
-          - mv -r style _site
-          - mv index.html _site
+          mkdir _site
+          mv -r content _site
+          mv -r style _site
+          mv index.html _site
 
       - name: Setup Pages (part 2)
         uses: actions/configure-pages@v5
