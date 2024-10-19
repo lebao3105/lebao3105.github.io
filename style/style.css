@@ -1,10 +1,20 @@
 * {
     font-family: 'Segoe UI';
-    background-color: black;
-    color: white;
     margin: 20px;
     font-weight: 100;
     font-size: 20px;
+}
+
+[data-theme="light"]
+{
+    background-color: white;
+    color: black;
+}
+
+[data-theme="dark"]
+{
+    background-color: black;
+    color: white;
 }
 
 /* H1 = header */
@@ -40,8 +50,13 @@ h6 { font-size: 20px; }
     font-family: 'Consolas', monospace;
 }
 
+/* Links */
 a:not(#path), i, code {
     margin: 0px 0px;
+}
+
+a, a:visited {
+    color: inherit;
 }
 
 /* Footer */
