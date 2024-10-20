@@ -21,8 +21,8 @@
 
 .card-project
 {
-    height: 100px;
-    max-height: 150px;
+    /* height: 100px;
+    max-height: 150px; */
 
     width: auto;
 }
@@ -30,8 +30,8 @@
 .grid
 {
     display: grid;
-    column-gap: 20px;
-    row-gap: 20px;
+    column-gap: 5px;
+    row-gap: 5px;
     column-count: 3;
     grid-template-columns: auto auto auto;
 }

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    
+    <link href="/style/style.css" rel="stylesheet">
+    <link href="/style/card.css" rel="stylesheet">
+    <script src="getAllPosts.js"></script>
+</head>
+
+<body>
+    <label id="path">/projects</label>
+
+    <h6 class="title">lebao3105's website</h6>
+    <h1>projects</h1>
+    <h6>Here are projects with their short description that I'm working on.</h6>
+
+    <div class="grid">
+        <script>
+            // FIXME ASAP
+            function openTew()
+            {
+                window.open("https://gitlab.com/textworker");
+            }
+
+            function openWW()
+            {
+                window.open("https://github.com/windows8group");
+            }
+
+            function openSC()
+            {
+                window.open("https://github.com/lebao3105/startscreen");
+            }
+
+            function openCB()
+            {
+                window.open("https://github.com/lebao3105/charms-bar-port");
+            }
+
+        </script>
+
+        <div class="card card-project" onclick="openTew()">
+            TextWorker
+            <br>
+            It is supposed to be an IDE, but when will this become true?
+        </div>
+
+        <div class="card card-project" onclick="openWW()">
+            WhatsWin (WhatsApp for Windows Phone)
+            <br>
+            The full name says it all. Parts of it is being actively implemented.
+        </div>
+
+        <div class="card card-project" onclick="openSC()">
+            Start Screen for Windows 10+ (fork)
+            <br>
+            It's a WPF app, and so broken with XAML Island attempt.
+        </div>
+        
+        <div class="card card-project" onclick="openCB()">
+            Charm Bar for Windows 10+ (fork)
+            <br>
+            It's a WPF app with some WinForms call. Currently it's being rewritten.
+        </div>
+    </div>
+
+</body>
+</html>
