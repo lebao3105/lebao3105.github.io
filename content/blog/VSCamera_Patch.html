@@ -19,13 +19,13 @@
     <a id="path"></a>
 
     <h6 class="title">Category: Blog</h6>
-    <h6 class="title" id="last-updated">Last modified: 2024-09-11 20:21</h6>
+    <h6 class="title" id="last-updated">Last modified: 2024-10-11 15:46</h6>
 
     <h1>Decompiling, patching and recompiling Vsmart Camera (part 1/n)</h1>
 
     <h4>Introducion</h4>
     <p>
-        Welcome to my first "blog" post! Or whatever this post is.
+        Welcome to my first "blog" post! Or whatever this kind of post is.
         <br>
         My journey with iOS jailbreaks has been stopped long ago, since my phone is no longer alive (freak wasted ~$10 for a battery then realized the phone can't be charged).
         <br>
@@ -199,37 +199,35 @@
             <span class="code-comment"># and more until there's no more available code name</span>
         </pre>
 
-        <code>invoke-static</code> calls a static method. Its first "argument" passes method parameters, second is the method path (class->method(parameter type)return type).
-        <br>
-        <code>invoke-virtual</code> does the same like <code>invoke-static</code>, but calls a virtual function instead.
-        <br>
+        <ul>
 
-        Two naming schemes for registers are v&lt;number&gt; and p&lt;number&gt;. I don't know how to explain them, but well, they store values.
-        <br>
-        <code>.locals</code> declare numbers of local registers.
-        <br>
-        <code>if-eqz</code> will execute the target sentence if target register equals 0.
-        <br>
-        <code>goto/16</code> performs an unconditional jump to label with a 16-bit offset, while <code>goto</code> uses 8-bit one.
-        <br>
-        <code>:cond_1</code>, <code>:cond_2</code> mark the begin of <code>cond_1</code> and <code>cond_2</code> labels.
-        <br>
-        <code>const-string</code> declares a register which stores the specified string.
-        <br>
-        <code>move-result</code> assigns the target register with the last recent invoke's value. For example:
+            <li><code>invoke-static</code> calls a static method. Its first "argument" passes method parameters, second is the method path (class->method(parameter type)return type).</li>
+            <li><code>invoke-virtual</code> does the same like <code>invoke-static</code>, but calls a virtual function instead.</li>
 
-        <pre>
-            <span>invoke-static {v0}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
-            <span></span>
-            <span>move-result v1</span>
-        </pre>
+            <li>Two naming schemes for registers are v&lt;number&gt; and p&lt;number&gt;. I don't know how to explain them, but well, they store values.</li>
+            <li><code>.locals</code> declare numbers of local registers.</li>
+            <li><code>if-eqz</code> will execute the target sentence if target register equals 0.</li>
+            <li><code>goto/16</code> performs an unconditional jump to label with a 16-bit offset, while <code>goto</code> uses 8-bit one.</li>
+            <li><code>:cond_1</code>, <code>:cond_2</code> mark the begin of <code>cond_1</code> and <code>cond_2</code> labels.</li>
+            <li><code>const-string</code> declares a register which stores the specified string.</li>
+            <li><code>move-result</code> assigns the target register with the last recent invoke's value. For example:
 
-        Will assign the value of <code>TextUtils.isEmpty()</code> call to v1.
+            <pre>
+                <span>invoke-static {v0}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+                <span></span>
+                <span>move-result v1</span>
+            </pre>
 
-        <code>sget-object</code> retrieves the value of static object field and store it in the specified register.
-        For example <code>sget-object v0, Lcom/bq/camera3/a/f;->t:Lcom/bq/camera3/a/f;</code> will assign v0 with t field from com.bq.camera3.a.f class.
+            Will assign the value of <code>TextUtils.isEmpty()</code> call to v1.</li>
 
-        <code>sput-object</code> does the opposite: assign a value into class's static field.
+            <li><code>sget-object</code> retrieves the value of static object field and store it in the specified register.
+            For example <code>sget-object v0, Lcom/bq/camera3/a/f;->t:Lcom/bq/camera3/a/f;</code> will assign v0 with t field from com.bq.camera3.a.f class.</li>
+
+            <li><code>sput-object</code> does the opposite: assign a value into class's static field.</li>
+
+            <li>Types: V is Void - can only be used for return types; Z is Boolean; B is Byte; S is Short, C is Char, I is Integer, J is 64-bit Long, F is Float, D is 64-bit Double.</li>
+
+        </ul>
 
         The cheat sheet can be found <a href="https://gist.github.com/AadilGillani/8c5690ebbaceda2914f9dc37197bd154">here</a>.
 

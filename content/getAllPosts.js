@@ -7,15 +7,21 @@ async function loadPosts(path)
 
     for (let file of data)
     {
-        var newElement = document.createElement('div')
-        const titleAndTime = getHTMLTitleAndLastModified(path + '/' + file.name)
-        newElement.innerHTML = titleAndTime[0] + "<br><br>" + titleAndTime[1]
+        if (file.name.endsWith(".html"))
+        {
+            var newElement = document.createElement('div')
+            const titleAndTime = getHTMLTitleAndLastModified(path + '/' + file.name)
+            newElement.innerHTML = titleAndTime[0] + "<br><br>" + titleAndTime[1]
 
-        newElement.style.backgroundColor = "lightgray"
-        newElement.style.paddingLeft = "10px"
-        newElement.style.cursor = "pointer"
+            newElement.style.backgroundColor = "lightgray"
+            newElement.style.paddingLeft = "10px"
+            newElement.style.cursor = "pointer"
+            newElement.onclick = function () {
+                location.href = path + '/' + file.name
+            }
 
-        targetList.appendChild(newElement)
+            targetList.appendChild(newElement)
+        }
     }
 }
 

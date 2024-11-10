@@ -85,6 +85,8 @@ bold {
 img {
     margin-left: auto;
     margin-right: auto;
+    display: block;
+    scale: 85%;
 }
 
 pre {
