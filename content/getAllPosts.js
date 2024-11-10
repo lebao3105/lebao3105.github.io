@@ -13,7 +13,7 @@ async function loadPosts(path)
             const titleAndTime = getHTMLTitleAndLastModified(path + '/' + file.name)
             newElement.innerHTML = titleAndTime[0] + "<br><br>" + titleAndTime[1]
 
-            newElement.style.backgroundColor = "lightgray"
+            newElement.style.backgroundColor = "#9e9e9e"
             newElement.style.paddingLeft = "10px"
             newElement.style.cursor = "pointer"
             newElement.onclick = function () {

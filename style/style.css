@@ -74,7 +74,9 @@ footer {
 
 /* iframe are now used to place header and footer. */
 iframe {
-    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
 }
 
 bold {

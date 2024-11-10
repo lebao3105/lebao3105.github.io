@@ -5,20 +5,12 @@
     <title>The first DuckStation build</title>
     <link href="../../style/style.css" rel="stylesheet">
 
-    <script>
-        window.onload = function() {
-            var pageloc = window.location.pathname;
-            pageloc = pageloc.replace(new RegExp("/", "g"), " / ").replace(".html", "");
-            document.getElementById("path").innerText = pageloc;
-            document.getElementById("path").setAttribute("href", document.URL + "/../");
-        }
-    </script>
+    <script src="../stuff.js"></script>
 </head>
 
 <body>
-    <!-- <iframe src="../../style/header.html" width="100%" frameborder="0" scolling="no"></iframe> -->
-
     <a id="path"></a>
+    <script>window.onload = loadPath("updates")</script>
 
     <h6 class="title">Category: Updates</h6>
     <h6 class="title" id="last-updated">Last modified: 2023-09-02 08:58</h6>
