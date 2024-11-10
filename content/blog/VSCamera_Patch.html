@@ -1,0 +1,264 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decompiling, patching and recompiling Vsmart Camera</title>
+    <link href="../../style/style.css" rel="stylesheet">
+
+    <script>
+        window.onload = function() {
+            var pageloc = window.location.pathname;
+            pageloc = pageloc.replace(new RegExp("/", "g"), " / ").replace(".html", "");
+            document.getElementById("path").innerText = pageloc;
+            document.getElementById("path").setAttribute("href", document.URL + "/../");
+        }
+    </script>
+</head>
+
+<body>
+    <a id="path"></a>
+
+    <h6 class="title">Category: Blog</h6>
+    <h6 class="title" id="last-updated">Last modified: 2024-09-11 20:21</h6>
+
+    <h1>Decompiling, patching and recompiling Vsmart Camera (part 1/n)</h1>
+
+    <h4>Introducion</h4>
+    <p>
+        Welcome to my first "blog" post! Or whatever this post is.
+        <br>
+        My journey with iOS jailbreaks has been stopped long ago, since my phone is no longer alive (freak wasted ~$10 for a battery then realized the phone can't be charged).
+        <br>
+        You may say I could use an emulator, but not in my Macbook Pro 2011. Hackintoshing my main PC did not success (the furthest was 2021 when I installed Catalina with networking! Slow but works).
+        <br>
+        Now I have an Android phone. Love to see it being rooted, but well, no OEM ROM (well, HTC phone). Not even bootloader unlocking thingy.
+        <br>
+        Let's talk about the main topic.
+        <br>
+        Vsmart, a long-dead local phone, smart home devices from Viet Nam, sold phones. The last generation comes with a modified Android 11.
+        <br>
+        It's name is VOS, version 4.
+
+        <img src="https://cdn.tgdd.vn/Files/2021/06/15/1360309/7_800x889.jpg" />
+
+        <img src="https://cdn.tgdd.vn/Files/2021/06/15/1360309/2_800x889.jpg" />
+
+        <img src="https://cdn.tgdd.vn/Files/2021/06/15/1360309/1_800x889.jpg" />
+
+        <blockquote style="text-align: center;">
+            Taken from The Gioi Di Dong (World of Mobiles), a electricity stuff vendor.<br>
+            Vsmart.net, which is seems to be Vsmart's official site, is not unreachable.
+        </blockquote>
+
+        You can see that the update uses more transparency and blur effects.
+        <br>
+        Not the main topic either.
+        <br>
+        I took today and yesterday (at the time of the first post's commit) just to find and install VOS applications.
+        <br>
+        Some works, some even available in Play Store, some are OEM-specific (e.g the Launcher). Some do not work when installed (e.g Files, Assistive Touch).
+        <br>
+        Most are tied to the system, uses inner system permissions. The Camera app is one of them.
+    </p>
+
+    <h4>Prepare</h4>
+    <p>
+        I've found a lot of APKs online, but here you can get many APKs without tapping the search bar:
+        <br>
+        https://dumps.tadiphone.dev/dumps/vsmart/casuarina
+        <br>
+        Go to <code>system/system/priv-app</code>, where you will see a lot of packages and providers there. Grab any of them that you want, here I will pick VsCamera.
+        <br>
+        Download the APK.
+        <br>
+        The whole process is done in Android, with the help of Termux and <a href="https://github.com/Xed-Editor/Xed-Editor">Karbon</a> the editor.
+        <br>
+        Install <code>openjdk-21</code> and Android SDK in Termux.
+        <br>
+        Here is the <a href="https://www.decompiler.com/">APK to Java</a> tool that I used.
+        <br>
+        Apktool is the tool I used to decompile the APK when I don't know how to compile the code back.
+        <br>
+        Actually I need the code from both tools, you will see why.
+    </p>
+
+    <h4>What's happening?</h4>
+    <p>
+        Easy: The app does not work because you're running in a non-Vsmart device.
+        <br>
+        Not any signing or permissions problem (they took me a while to fix that for VOS launcher, but after all, failed).
+
+        <img src="VsCamera_Images/Screenshot_20241109-163154.png" />
+    </p>
+
+    <h4>Find the string</h4>
+    <p>
+        Vsmart did not sell its phone to many countries, I only remember some phones being sold to Russia, that's all.
+        <br>
+        So the translation are not much, even though you see a lot of translations in <code>values-</code> inside the <code>res</code> folder.
+        <br>
+        The string we gonna find is named: <code>app_not_support_error</code>.
+        <br>
+        Easy.
+    </p>
+
+    <h4>Patch</h4>
+    <p>
+        The hardest work is here.
+        <br>
+        The decompiled source (both tools) contains a lot of <code>a</code>, <code>b</code>, <code>c</code>... alphabetical characters as folder name, file name, class name, even variables and methods name.
+        <br>
+        You will see something like <code>c.a.a()</code> or even worse.
+
+        After finding the error string at the Decompiler.com's decompiled code, I've found where it is:
+        <br>
+        <pre spellcheck="false">
+            <span>if (c.b() == f.t) {</span>
+            <span>    a(getString(R.string.dialog_app_not_support), getString(R.string.app_not_support_error), getString(R.string.dialog_ok), new io.reactivex.c.a()</span>
+            <span>    {</span>
+            <span>        public final void run() {</span>
+            <span>            MainActivity.this.v();</span>
+            <span>        }</span>
+            <span>    });</span>
+            <span>    return;</span>
+            <span>}</span>
+        </pre>
+
+        This piece of code is in <code>/sources/com/bq/camera3/common/MainActivity.java</code>.
+        <br>
+        <code>c</code> is <code>com.bq.camera3.util.c</code>, while <code>f</code> is <code>com.bq.camera3.a.f</code>.
+        <br>
+        Looking at how the <code>c</code> (compiled from DeviceUtils class) was made (according to the decompiler):
+        <ul>
+            <li><code>a()</code> overloads return stuff about classes, RAM(???), android.os.Build's DISPLAY (A build ID string meant for displaying to the user - from developer.android.com), android.content.Context's version, set screen brightness, set notification interrupt filter, set vibration.</li>
+            <li><code>b()</code> is the thing we want. It returns an instance of <code>com.bq.camera3.a.f</code>, as we can see above. This function will check the device code name and return the right <code>f</code> for that.</li>
+        </ul>
+
+        <code>com.bq.camera3.a.f</code> class contains objects made for specific devices.<br>
+
+        Now it's Smali code part, which is made by Apktool.<br>
+
+        Smali, an Assembly-look-like language, replaces Java/Kotlin/whatever as the primary language in Apktool's decompiled code. A simple class would look like this:
+
+        <pre>
+            <span>.class public Lme/lebao3105/package/folder/name;</span>
+            <span>.super Ljava/lang/Object;</span>
+            <span>.source "name.java"</span>
+            <span></span>
+            <span class="code-comment"># fields, also this is a comment:)</span>
+            <span>.field &lt;private or public&gt; &lt;static if you want&gt; name:L:&lt;type&gt;</span>
+            <span></span>
+            <span class="code-comment"># method</span>
+            <span>.method &lt;private or public&gt; &lt;static if you want&gt; methodName(L&lt;type&gt;)L&lt;returnType&gt;</span>
+            <span class="code-comment">    # implementation here</span>
+            <span>.end method</span>
+        </pre>
+
+        The class above is in me.lebao3105.package.folder.name package, the source file is "name.java", inherited java.lang.Object.
+        <br>
+        Before every type name is a <code>L</code>, don't know why.
+        <br>
+        The language supports goto and label definitions.<br>
+        
+        Here goes the device code name comparison:
+        
+        <pre>
+            <span>sget-object v0, Landroid/os/Build;->DEVICE:Ljava/lang/String;</span>
+            <span># the comparison started in the 104th line</span>
+            <span>.line 104</span>
+            <span>invoke-static {v0}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+            <span></span>
+            <span>move-result v1</span>
+            <span></span>
+            <span>if-eqz v1, :cond_1</span>
+            <span></span>
+            <span>.line 105</span>
+            <span>sget-object v0, Lcom/bq/camera3/a/f;->t:Lcom/bq/camera3/a/f;</span>
+            <span></span>
+            <span>sput-object v0, Lcom/bq/camera3/util/c;->a:Lcom/bq/camera3/a/f;</span>
+            <span></span>
+            <span>goto/16 :goto_1</span>
+            <span></span>
+            <span>:cond_1</span>
+            <span>const-string v1, "pinus"</span>
+            <span></span>
+            <span>.line 106</span>
+            <span>invoke-virtual {v1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z</span>
+            <span></span>
+            <span>move-result v1</span>
+            <span></span>
+            <span>if-eqz v1, :cond_2</span>
+            <span></span>
+            <span>.line 108</span>
+            <span>sget-object v0, Lcom/bq/camera3/a/f;->a:Lcom/bq/camera3/a/f;</span>
+            <span></span>
+            <span>sput-object v0, Lcom/bq/camera3/util/c;->a:Lcom/bq/camera3/a/f;</span>
+            <span></span>
+            <span>goto/16 :goto_1</span>
+            <span></span>
+            <span class="code-comment"># and more until there's no more available code name</span>
+        </pre>
+
+        <code>invoke-static</code> calls a static method. Its first "argument" passes method parameters, second is the method path (class->method(parameter type)return type).
+        <br>
+        <code>invoke-virtual</code> does the same like <code>invoke-static</code>, but calls a virtual function instead.
+        <br>
+
+        Two naming schemes for registers are v&lt;number&gt; and p&lt;number&gt;. I don't know how to explain them, but well, they store values.
+        <br>
+        <code>.locals</code> declare numbers of local registers.
+        <br>
+        <code>if-eqz</code> will execute the target sentence if target register equals 0.
+        <br>
+        <code>goto/16</code> performs an unconditional jump to label with a 16-bit offset, while <code>goto</code> uses 8-bit one.
+        <br>
+        <code>:cond_1</code>, <code>:cond_2</code> mark the begin of <code>cond_1</code> and <code>cond_2</code> labels.
+        <br>
+        <code>const-string</code> declares a register which stores the specified string.
+        <br>
+        <code>move-result</code> assigns the target register with the last recent invoke's value. For example:
+
+        <pre>
+            <span>invoke-static {v0}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z</span>
+            <span></span>
+            <span>move-result v1</span>
+        </pre>
+
+        Will assign the value of <code>TextUtils.isEmpty()</code> call to v1.
+
+        <code>sget-object</code> retrieves the value of static object field and store it in the specified register.
+        For example <code>sget-object v0, Lcom/bq/camera3/a/f;->t:Lcom/bq/camera3/a/f;</code> will assign v0 with t field from com.bq.camera3.a.f class.
+
+        <code>sput-object</code> does the opposite: assign a value into class's static field.
+
+        The cheat sheet can be found <a href="https://gist.github.com/AadilGillani/8c5690ebbaceda2914f9dc37197bd154">here</a>.
+
+        To fix the original problem, just remove all checks and assign v0 to a random object of com.bq.camera3.a.f.
+    </p>
+
+    <h4>Build and run</h4>
+    <p>
+        We can package the code back with <code>apktool b VsCamera/</code>, but unfortunately it doesn't work in Termux.
+        <br>
+        Do it in PC then:)
+        <br>
+        You may need to sign the APK too, and remove the currently installed version (if any).
+        <br>
+        Now open the app. Oh it's freezed!
+        <br>
+        LogFox shows this:
+
+        <img src="VsCamera_Images/Screenshot_20241110-150638.png" />
+        <br>
+        At least we've got through the unsupported device error!
+    </p>
+
+    <h4>End</h4>
+    <p>
+        Well the application is still not working as intended:(
+        
+        *quits the chat*
+    </p>
+
+    <iframe src="../../style/footer.html" width="100%" frameborder="0" scolling="no"></iframe>
+</body>

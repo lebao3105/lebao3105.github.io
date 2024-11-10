@@ -48,31 +48,31 @@
 
         <p>
             It's the best to just install Visual Studio and start Developer Command Prompt.<br>
-            All external tools must be added to <code class="inline-code">%PATH%</code>.
+            All external tools must be added to <code>%PATH%</code>.
         </p>
     </p>
 
     <p>
         You also need to set these variables:
         <ul>
-            <li><code class="inline-code">%WXWIN%</code>: Where to install wxWidgets</li>
-            <li><code class="inline-code">%WXCFG%</code>: Relative path to <code class="inline-code">build.cfg</code> file (start from <code class="inline-code">%WXWIN%</code>). Use the one matching your target build type (static, shared) and computer architecture.</li>
-            <li><code class="inline-code">%ARCH%</code>: Target build architecture</li>
+            <li><code>%WXWIN%</code>: Where to install wxWidgets</li>
+            <li><code>%WXCFG%</code>: Relative path to <code>build.cfg</code> file (start from <code>%WXWIN%</code>). Use the one matching your target build type (static, shared) and computer architecture.</li>
+            <li><code>%ARCH%</code>: Target build architecture</li>
         </ul>
     </p>
 
     <h4>Bake the cake!</h4>
     <p>
-        1. Start (Developer) Command Prompt with all needed tools are in <code class="inline-code">%PATH%</code>.<br><br>
-        2. <code class="inline-code">cd</code> to where to clone the project. Clone wxWidgets with <code class="inline-code">--recursive</code> flag.<br><br>
-        3. <code class="inline-code">cd</code> to the source code directory.<br><br>
+        1. Start (Developer) Command Prompt with all needed tools are in <code>%PATH%</code>.<br><br>
+        2. <code>cd</code> to where to clone the project. Clone wxWidgets with <code>--recursive</code> flag.<br><br>
+        3. <code>cd</code> to the source code directory.<br><br>
         4. Run:<br>
-        <ol>
-            <li>md build</li>
-            <li>cd build</li>
-            <li>cmake -G [generator] .. -DCMAKE_INSTALL_PREFIX=%WXWIN% -DCMAKE_GENERATOR_PLATFORM=%ARCH%</li>
-            <li>cmake --build . --target install</li>
-        </ol>
+        <pre>
+            <span>md build</span>
+            <span>cd build</span>
+            <span>cmake -G [generator] .. -DCMAKE_INSTALL_PREFIX=%WXWIN% -DCMAKE_GENERATOR_PLATFORM=%ARCH%</span>
+            <span>cmake --build . --target install</span>
+        </pre>
 
         <p>
             That's all! Now wait to the build and installation to finish.<br>
