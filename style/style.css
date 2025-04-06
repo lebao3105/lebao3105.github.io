@@ -1,7 +1,7 @@
 @import url('fonts.css');
 
 * {
-    font-family: 'Segoe WP';
+    font-family: 'Segoe WP', 'Segoe UI Regular', 'Cantarell', 'Ubuntu', 'SF Pro Display';
     margin: 20px;
     font-weight: 100;
     font-size: 20px;
@@ -91,6 +91,7 @@ img {
     margin-right: auto;
     display: block;
     scale: 85%;
+    max-width: 800;
 }
 
 pre {
@@ -106,7 +107,7 @@ pre span {
 }
 
 pre span:before { 
-    content: counter(line) " ";
+    content: counter(line) "    ";
     display: inline-block;
     border-right: 1px solid #ddd;
     margin-right: .5em;
