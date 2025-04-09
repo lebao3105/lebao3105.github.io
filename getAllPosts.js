@@ -1,9 +1,27 @@
 async function loadPosts(path)
 {
+    const targetList = document.getElementById("grid");
+    targetList.innerHTML = `\
+        <div class="progress-ring progress-large">
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+        </div>
+    `
+
     const response = await fetch(
         `https://api.github.com/repos/lebao3105/lebao3105.github.io/contents/${path}`)
     const data = await response.json()
-    const targetList = document.getElementById("grid");
+
+    if (data.length === 1 && !data[0].name.endsWith(".html"))
+    {
+        targetList.innerHTML = `<h1 style="text-align: center;">No posts found;)</h1>`
+        return
+    }
+    else
+        targetList.innerHTML = ""
 
     for (let file of data)
     {

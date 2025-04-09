@@ -114,6 +114,8 @@ pre span:before {
 
 .card {
     border: 3px solid #0078D7;
+    margin: 10px;
+    text-align: left;
 }
 
 .hint {
@@ -121,4 +123,8 @@ pre span:before {
     color: white;
     padding: 0;
     margin: 0;
+}
+
+#grid {
+    text-align: center;
 }
