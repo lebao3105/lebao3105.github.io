@@ -40,6 +40,8 @@ h5 { font-size: 30px; }
 
 h6 { font-size: 20px; }
 
+small { font-size: 15px; color: #888;}
+
 code {
     padding: 2px 2px;
     background-color: rgba(109, 109, 109, 0.555);
