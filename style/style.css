@@ -1,19 +1,21 @@
-@import url('fonts.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/winstrap/0.5.12/css/winstrap.min.css');
 
 * {
-    font-family: 'Segoe WP', 'Segoe UI Regular', 'Cantarell', 'Ubuntu', 'SF Pro Display';
-    margin: 20px;
     font-weight: 100;
     font-size: 20px;
 }
 
-@media (prefers-color-scheme: light)
+body {
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+/* @media (prefers-color-scheme: light)
 {
     * {
         background-color: white;
         color: black;
     }
-
 }
 
 @media (prefers-color-scheme: dark)
@@ -22,25 +24,12 @@
         background-color: black;
         color: white;
     }
+} */
+
+p {
+    font-size: 20px;
+    font-weight: lighter;
 }
-
-/* H1 = header */
-h1 {
-    font-size: 60px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-}
-
-/* Section */
-h3 { font-size: 50px; }
-
-h4 { font-size: 40px; }
-
-h5 { font-size: 30px; }
-
-h6 { font-size: 20px; }
-
-small { font-size: 15px; color: #888;}
 
 code {
     padding: 2px 2px;
@@ -56,15 +45,12 @@ code {
     text-transform: uppercase;
     font-weight: bolder;
     color: darkgray;
+    padding-top: 0;
 }
 
 /* Links */
 a:not(#path), i, code {
-    margin: 0px 0px;
-}
-
-a, a:visited {
-    color: inherit;
+    margin: 0;
 }
 
 /* Footer */
@@ -86,6 +72,7 @@ iframe {
 bold {
     margin: 0;
     font-weight: bold;
+    padding: 0;
 }
 
 img {
@@ -99,6 +86,7 @@ img {
 pre {
     background: inherit;
     color: inherit;
+    border: 0;
 }
 
 pre span {
@@ -118,4 +106,19 @@ pre span:before {
 
 .code-comment {
     color: rgb(58, 197, 45)
+}
+
+.title-big {
+    padding-top: 0;
+}
+
+.card {
+    border: 3px solid #0078D7;
+}
+
+.hint {
+    background-color: #0078D7;
+    color: white;
+    padding: 0;
+    margin: 0;
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    
+    <link href="/style/style.css" rel="stylesheet">
+    <script src="getAllPosts.js"></script>
+    <script src="stuff.js"></script>
+</head>
+
+<body onload="loadPath()">
+    <ol id="path" class="breadcrumb"></ol>
+
+    <h6 class="title">lebao3105's website</h6>
+    <h1 class="title-big">projects</h1>
+    <h6>Here are projects with their short description that I'm working on.</h6>
+
+    <div class="row section-gallery">
+        <div class="col-md-6 card" onclick="window.open(`https://gitlab.com/textworker`);">
+            TextWorker<br>
+            It is supposed to be an IDE, but when will this become true?
+        </div>
+
+        <div class="col-md-6 card" onclick="window.open(`https://github.com/windows8group`)">
+            WhatsWin (WhatsApp for Windows Phone)
+            <br>
+            The full name says it all. Parts of it are being implemented.
+        </div>
+
+        <div class="col-md-6 card" onclick="window.open(`https://github.com/lebao3105`)">
+            All GitHub projects
+        </div>
+        
+        <div class="col-md-6 card" onclick="window.open(`https://gitlab.com/lebao3105)">
+            All GitLab projects
+        </div>
+    </div>
+</body>
+</html>
