@@ -33,12 +33,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Pages
-        run: |
-          mkdir _site
-          mv content _site
-          mv  style _site
-          mv index.html _site
+      # - name: Setup Pages
+      #   run: |
+      #     mkdir _site
+      #     mv content _site
+      #     mv  style _site
+      #     mv index.html _site
 
       - name: Setup Pages (part 2)
         uses: actions/configure-pages@v5
