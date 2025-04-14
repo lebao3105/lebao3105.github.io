@@ -93,7 +93,6 @@ pre span {
     display: inline;
     font-family: monospace;
     counter-increment: line;
-    text-wrap: wrap;
 }
 
 pre span:before { 
