@@ -12,7 +12,7 @@ async function loadPosts(path)
     `
 
     const response = await fetch(
-        `https://api.github.com/repos/lebao3105/lebao3105.github.io/contents/${path}`)
+        `https://api.github.com/repos/lebao3105/lebao3105.github.io/${path}`)
     const data = await response.json()
 
     if (data.length === 1 && !data[0].name.endsWith(".html"))
