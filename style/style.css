@@ -1,4 +1,4 @@
-@import url('https://cdnjs.cloudflare.com/ajax/libs/winstrap/0.5.12/css/winstrap.min.css');
+@import url("https://cdnjs.cloudflare.com/ajax/libs/winstrap/0.5.12/css/winstrap.css");
 
 * {
     font-weight: 100;
@@ -36,7 +36,7 @@ code {
     background-color: rgba(109, 109, 109, 0.555);
     border: 1px solid transparent;
     border-radius: 3px;
-    font-family: 'Consolas', monospace;
+    font-family: "Consolas", monospace;
 }
 
 /* Website title */
@@ -49,7 +49,9 @@ code {
 }
 
 /* Links */
-a:not(#path), i, code {
+a:not(#path),
+i,
+code {
     margin: 0;
 }
 
@@ -95,16 +97,16 @@ pre span {
     counter-increment: line;
 }
 
-pre span:before { 
+pre span:before {
     content: counter(line) "    ";
     display: inline-block;
     border-right: 1px solid #ddd;
-    margin-right: .5em;
-    color: #888
+    margin-right: 0.5em;
+    color: #888;
 }
 
 .code-comment {
-    color: rgb(58, 197, 45)
+    color: rgb(58, 197, 45);
 }
 
 .title-big {
@@ -112,18 +114,14 @@ pre span:before {
 }
 
 .card {
-    border: 3px solid #0078D7;
+    border: 3px solid #0078d7;
     margin: 10px;
     text-align: left;
 }
 
 .hint {
-    background-color: #0078D7;
+    background-color: #0078d7;
     color: white;
     padding: 0;
     margin: 0;
-}
-
-#grid {
-    text-align: center;
 }
