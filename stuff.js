@@ -61,7 +61,10 @@ function createTabItem(val, idx) {
   label.classList.add("title-big");
   label.textContent = val.replace("\.html", "");
 
-  if (document.location.pathname.endsWith(val)) {
+  if (
+    document.location.pathname.endsWith(val) ||
+    document.location.pathname == "/"
+  ) {
     li.classList.add("active");
     label.setAttribute("role", "tab");
     label.setAttribute("data-toggle", "tab");
