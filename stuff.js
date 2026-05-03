@@ -1,11 +1,11 @@
 function loadPath() {
-  var pageloc = window.location.pathname;
-  pageloc = pageloc.replace(new RegExp("/", "g"), " / ").replace(".html", "");
-
+  var pageloc = window.location.pathname.replace(".html", "");
   var breadcrumbOL = document.getElementById("path");
 
   function createNewLi(element, index, arr) {
     var newLI = document.createElement("li");
+
+    if (element === "index") return;
 
     if (index === arr.length - 1) {
       newLI.className = "active";
@@ -24,7 +24,7 @@ function loadPath() {
 
     breadcrumbOL.appendChild(newLI);
   }
-  pageloc.split(" / ").forEach(createNewLi);
+  pageloc.split("/").forEach(createNewLi);
 }
 
 function setupBackToTop() {
@@ -53,7 +53,7 @@ function setupBackToTop() {
   window.onresize = onViewportChange;
 }
 
-function createTabItem(val, idx) {
+function createTabItem(val) {
   var li = document.createElement("li");
   li.setAttribute("role", "presentation");
 
@@ -63,7 +63,7 @@ function createTabItem(val, idx) {
 
   if (
     document.location.pathname.endsWith(val) ||
-    document.location.pathname == "/"
+    (document.location.pathname === "/" && val === "index.html")
   ) {
     li.classList.add("active");
     label.setAttribute("role", "tab");
@@ -89,7 +89,7 @@ function setupPivot() {
     "tutorials.html",
     "updates.html",
     "blog.html",
-  ].forEach((val, idx, __) => {
-    tabList.appendChild(createTabItem(val), idx);
+  ].forEach((val, _, __) => {
+    tabList.appendChild(createTabItem(val));
   });
 }
