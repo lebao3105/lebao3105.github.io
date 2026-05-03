@@ -8,7 +8,10 @@
     <script src="../stuff.js"></script>
 </head>
 
-<body onload="loadPath()">
+<body onload="
+    loadPath();
+    setupBackToTop();
+">
     <ol class="breadcrumb" id="path"></ol>
 
     <h6 class="title">Category: Updates</h6>
@@ -81,9 +84,9 @@
     <h4>Where to get</h4>
     <p>
         This <a href="https://github.com/basharast/DuckStation-UWP-ARM/releases">page</a>.
-
+        <br>
         Note from Bashar: Reduce Overclocking value may help improve performance for weak GPUs - if you have enabled it - but don't reduce too much. Also disabling Scaled Dithering could help.
-
+        <br>
         Enjoy!
     </p>
 

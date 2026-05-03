@@ -10,11 +10,17 @@
         <script src="stuff.js"></script>
     </head>
 
-    <body onload="loadPath()">
+    <body
+        onload="
+            loadPath();
+            setupBackToTop();
+            setupPivot();
+        "
+    >
         <ol id="path" class="breadcrumb"></ol>
 
         <h6 class="title">lebao3105's website</h6>
-        <h1 class="title-big">projects</h1>
+        <ul class="nav nav-tabs" role="tablist"></ul>
         <h6>
             Here are projects with their short description that I'm working on.
         </h6>
@@ -22,7 +28,7 @@
         <div class="row section-gallery">
             <div
                 class="col-md-6 card"
-                onclick="window.open(`https://gitlab.com/textworker`);"
+                onclick="window.open(`https://gitlab.com/textworker`)"
             >
                 TextWorker<br />
                 It is supposed to be an IDE, but when will this become true?

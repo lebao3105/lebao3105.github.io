@@ -1,33 +1,92 @@
-function loadPath()
-{
-    var pageloc = window.location.pathname;
-    pageloc = pageloc.replace(new RegExp("/", "g"), " / ").replace(".html", "");
+function loadPath() {
+  var pageloc = window.location.pathname;
+  pageloc = pageloc.replace(new RegExp("/", "g"), " / ").replace(".html", "");
 
-    var breadcrumbOL = document.getElementById("path");
-    
-    function createNewLi(element, index, arr) {
-        var newLI = document.createElement("li");
+  var breadcrumbOL = document.getElementById("path");
 
-        if (index === 0)
-        {
-            var newA = document.createElement("a");
-            newA.setAttribute("href", "https://lebao3105.github.io");
-            newA.appendChild(document.createTextNode("C:"));
-            newLI.appendChild(newA);
-        }
-        else if (index === (arr.length - 1))
-        {
-            newLI.className = "active";
-            newLI.appendChild(document.createTextNode(element));
-        }
-        else {
-            var newA = document.createElement("a");
-            newA.setAttribute("href", document.URL + "/../".repeat(index + 1));
-            newA.appendChild(document.createTextNode(element));
-            newLI.appendChild(newA);
-        }
+  function createNewLi(element, index, arr) {
+    var newLI = document.createElement("li");
 
-        breadcrumbOL.appendChild(newLI);
+    if (index === arr.length - 1) {
+      newLI.className = "active";
+      newLI.appendChild(document.createTextNode(element));
+    } else {
+      var newA = document.createElement("a");
+      if (index === 0) {
+        newA.setAttribute("href", "https://lebao3105.github.io");
+        newA.appendChild(document.createTextNode("C:"));
+      } else {
+        newA.setAttribute("href", document.URL + "/../".repeat(index + 1));
+        newA.appendChild(document.createTextNode(element));
+      }
+      newLI.appendChild(newA);
     }
-    pageloc.split(" / ").forEach(createNewLi);
+
+    breadcrumbOL.appendChild(newLI);
+  }
+  pageloc.split(" / ").forEach(createNewLi);
+}
+
+function setupBackToTop() {
+  var backToTop = document.createElement("a");
+  backToTop.id = "back-to-top";
+  backToTop.href = "#top";
+  backToTop.className = "invisible";
+  backToTop.onclick = () => {
+    document.body.scrollTo(0, 0);
+    this.className = "invisible";
+    return false;
+  };
+
+  var glyph = document.createElement("i");
+  glyph.classList.add("glyph");
+  glyph.classList.add("glyph-up");
+  backToTop.appendChild(glyph);
+  document.body.appendChild(backToTop);
+
+  function onViewportChange(_) {
+    backToTop.className =
+      document.body.scrollTop < 20 ? "invisible" : "visible";
+  }
+
+  window.onscroll = onViewportChange;
+  window.onresize = onViewportChange;
+}
+
+function createTabItem(val, idx) {
+  var li = document.createElement("li");
+  li.setAttribute("role", "presentation");
+
+  var label = document.createElement("h1");
+  label.classList.add("title-big");
+  label.textContent = val.replace("\.html", "");
+
+  if (document.location.pathname.endsWith(val)) {
+    li.classList.add("active");
+    label.setAttribute("role", "tab");
+    label.setAttribute("data-toggle", "tab");
+    li.appendChild(label);
+  } else {
+    var lnk = document.createElement("a");
+    lnk.href = "./" + val;
+    lnk.setAttribute("role", "tab");
+    lnk.setAttribute("data-toggle", "tab");
+    lnk.appendChild(label);
+    li.appendChild(lnk);
+  }
+
+  return li;
+}
+
+function setupPivot() {
+  var tabList = document.getElementsByClassName("nav-tabs")[0];
+  [
+    "index.html",
+    "projects.html",
+    "tutorials.html",
+    "updates.html",
+    "blog.html",
+  ].forEach((val, idx, __) => {
+    tabList.appendChild(createTabItem(val), idx);
+  });
 }

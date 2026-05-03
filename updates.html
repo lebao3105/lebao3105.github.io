@@ -10,11 +10,18 @@
         <script src="stuff.js"></script>
     </head>
 
-    <body onload="loadPosts('updates'); loadPath()">
+    <body
+        onload="
+            loadPosts('updates');
+            loadPath();
+            setupBackToTop();
+            setupPivot();
+        "
+    >
         <ol id="path" class="breadcrumb"></ol>
 
         <h6 class="title">lebao3105's website</h6>
-        <h1 class="title-big">updates</h1>
+        <ul class="nav nav-tabs" role="tablist"></ul>
 
         <div class="entity-list entity-list-expandable" id="grid" />
     </body>
