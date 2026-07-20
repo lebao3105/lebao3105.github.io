@@ -17,7 +17,7 @@ set_target_properties(website
     PROPERTIES
         OUTPUT_NAME                 "siteInit"
         SUFFIX                      ".wasm"
-        RUNTIME_OUTPUT_DIRECTORY    "$<CMAKE_SOURCE_DIR>/js/"
+        RUNTIME_OUTPUT_DIRECTORY    "${CMAKE_SOURCE_DIR}/js/"
 )
 set(EMCC_ARGS
     -sMODULARIZE
