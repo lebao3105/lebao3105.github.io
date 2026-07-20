@@ -5,6 +5,7 @@
 .cache/
 build/
 
+a.out*
 *.wasm
 site*.js
 *.exe

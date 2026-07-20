@@ -14,11 +14,13 @@ set_target_properties(website
         SUFFIX                      ".wasm"
         RUNTIME_OUTPUT_DIRECTORY    "${CMAKE_SOURCE_DIR}/js/"
 )
-set(EMCC_ARGS
+add_compile_options(
+    -lembind
+    -fwasm-exceptions
     -sMODULARIZE
     -sASSERTIONS
-    -lembind
+    --preload-file content@/content
     --closure 0
     --emit-symbol-map
-    --fwasm-exceptions
 )
+include_directories(js)
