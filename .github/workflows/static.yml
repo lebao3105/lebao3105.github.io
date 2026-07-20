@@ -2,6 +2,8 @@ name: Publish page
 
 on:
   push:
+    branches:
+      - main
     paths-ignore:
       - README.md
       - .git*
@@ -32,15 +34,13 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: lebao3105/lebao3105.github.io/.github/workflows/ci.yml
+      - uses: lebao3105/lebao3105.github.io/.github/workflows/ci.yml@feat/wasm
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
-        if: github.ref == 'refs/heads/main'
         with:
           path: .
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        if: github.ref == 'refs/heads/main'
