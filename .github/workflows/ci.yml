@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    paths-ignore:
+      - README.md
+      - .git*
+      - .editorconfig
+
+  workflow_dispatch:
+  workflow_call:
+
+env:
+  EM_CACHE_DIR: 'em-cache'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.x'
+
+      - name: Setup cache
+        id: cache-system-libraries
+        uses: actions/cache@v5
+        with:
+          path: ${{env.EM_CACHE}}
+          key: ${{env.EM_VERSION}}-${{ runner.os }}
+
+      - name: Setup Emscripten
+        uses: emscripten-core/setup-emsdk@v15
+        with:
+          actions-cache-folder: ${{env.EM_CACHE}}
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build
+        run: |
+            cmake -B build
+            cmake --build build -- VERBOSE=1
