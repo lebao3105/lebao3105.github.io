@@ -33,8 +33,8 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    uses: lebao3105/lebao3105.github.io/.github/workflows/ci.yml@feat/wasm
     steps:
-      - uses: lebao3105/lebao3105.github.io/.github/workflows/ci.yml@feat/wasm
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
