@@ -1,0 +1,18 @@
+add_rules("mode.debug", "mode.release", "mode.releasedbg")
+add_rules("plugin.compile_commands.autoupdate")
+add_requires("emscripten")
+set_policy("check.auto_ignore_flags", false)
+
+target("website")
+    set_kind("binary")
+    set_plat("wasm")
+    set_languages("cxx20")
+    set_filename("siteInit.wasm")
+    set_targetdir("js")
+
+    add_files("js/*.cxx")
+    add_cxxflags("-sMODULARIZE", "--closure 0", "--emit-symbol-map")
+    add_cxxflags("-sASSERTIONS", "-fwasm-exceptions", "-lembind")
+    add_packages("emscripten")
+    add_includedirs("js")
+    add_values("wasm.preloadfiles", "content@/content")

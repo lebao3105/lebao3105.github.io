@@ -1,3 +1,16 @@
 .zed/
 .vscode/
 .idea/
+.xmake/
+.cache/
+build/
+
+*.wasm
+site*.js
+*.exe
+*.o
+*.ppu
+*.so.*
+*.a
+*.lib
+compile_commands.json

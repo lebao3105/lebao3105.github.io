@@ -5,19 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Blog</title>
 
-        <link href="/style/style.css" rel="stylesheet" />
-        <script src="getAllPosts.js"></script>
-        <script src="stuff.js"></script>
-    </head>
-
-    <body
-        onload="
-            loadPosts('blog');
+        <link rel="stylesheet" href="https://unpkg.com/@spiritov/ds.css" />
+        <link href="./style/style.css" rel="stylesheet" />
+        <script type="module">
+            import { loadPath, setupBackToTop, setupPivot } from './js/init.js';
             loadPath();
             setupBackToTop();
             setupPivot();
-        "
-    >
+        </script>
+        <script src="./js/getAllPosts.js"></script>
+    </head>
+
+    <body>
         <ol id="path" class="breadcrumb"></ol>
 
         <h6 class="title">lebao3105's website</h6>

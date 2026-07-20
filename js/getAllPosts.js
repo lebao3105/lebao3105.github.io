@@ -1,13 +1,31 @@
 async function loadPosts(path) {
   const targetList = document.getElementById("grid");
   targetList.innerHTML = `\
-        <div class="progress-bar" style="text-align: center">
-            <div class="progress-circle"></div>
-            <div class="progress-circle"></div>
-            <div class="progress-circle"></div>
-            <div class="progress-circle"></div>
-            <div class="progress-circle"></div>
-        </div>
+    <div class="alert" style="justify-items: center; align-items: center;">
+      <div class="loading-container">
+        <div class="loading-1"></div>
+        <div class="loading-2"></div>
+        <div class="loading-3"></div>
+        <div class="loading-4"></div>
+        <div class="loading-5"></div>
+        <div class="loading-6"></div>
+        <div class="loading-7"></div>
+        <div class="loading-8"></div>
+        <div class="loading-9"></div>
+      </div>
+      <span style="color: white">Getting posts...</span>
+      <div class="loading-container">
+        <div class="loading-1"></div>
+        <div class="loading-2"></div>
+        <div class="loading-3"></div>
+        <div class="loading-4"></div>
+        <div class="loading-5"></div>
+        <div class="loading-6"></div>
+        <div class="loading-7"></div>
+        <div class="loading-8"></div>
+        <div class="loading-9"></div>
+      </div>
+    </div>
     `;
 
   const response = await fetch(

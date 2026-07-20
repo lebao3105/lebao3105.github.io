@@ -1,0 +1,29 @@
+.title {
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    padding-top: 0;
+}
+
+.nav-tabs {
+    margin: 0;
+}
+
+.nav {
+    margin-bottom: 20px;
+}
+
+.title-big {
+    padding-top: 0;
+    margin-right: 20px;
+    font-weight: normal;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.title-big:hover {
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.active {
+    color: black;
+}

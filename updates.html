@@ -3,26 +3,26 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Updates</title>
+        <title>Updates - lebao3105's site</title>
 
-        <link href="style/style.css" rel="stylesheet" />
-        <script src="getAllPosts.js"></script>
-        <script src="stuff.js"></script>
-    </head>
-
-    <body
-        onload="
-            loadPosts('updates');
+        <link rel="stylesheet" href="https://unpkg.com/@spiritov/ds.css" />
+        <link href="./style/style.css" rel="stylesheet" />
+        <script type="module">
+            import { loadPath, setupBackToTop, setupPivot } from './js/init.js';
             loadPath();
             setupBackToTop();
             setupPivot();
-        "
-    >
+        </script>
+        <script src="./js/getAllPosts.js"></script>
+    </head>
+
+    <body>
         <ol id="path" class="breadcrumb"></ol>
 
         <h6 class="title">lebao3105's website</h6>
         <ul class="nav nav-tabs" role="tablist"></ul>
 
-        <div class="entity-list entity-list-expandable" id="grid" />
+        <div class="ds-grid-lg grid grid-cols-2 gap-4"
+             style="justify-items: center; align-items: center;" id="grid" />
     </body>
 </html>

@@ -1,0 +1,20 @@
+#back-to-top i {
+    color: rgba(0, 0, 0, 0.6);
+    /* found from winstrap's wayback archive,
+       to fix the arrow's alignment */
+    margin-left: 2px;
+}
+
+#back-to-top {
+    background: rgba(0, 0, 0, 0.1);
+    width: 48px;
+    height: 48px;
+    padding: 12px;
+    transition:
+        opacity 0.3s,
+        transform 0.3s,
+        -webkit-transform 0.3s ease-in-out;
+    position: fixed;
+    right: 24px;
+    bottom: 12px;
+}

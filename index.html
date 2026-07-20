@@ -1,81 +1,51 @@
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>lebao3105's website</title>
+        <script>
+            Module = {
+                "printWithColors": false,
+                "locateFile": function(path, prefix) {
+                    if (prefix === '') {
+                        prefix = location.origin + '/js/';
+                    }
+                    return prefix + path;
+                }
+            }
+        </script>
+        <script async type="text/javascript" src="js/siteInit.js"></script>
+        <script type="module" src="https://unpkg.com/@spiritov/ds.css/dist/widgets/ds-calendar.js"></script>
+        <script type="module" src="https://unpkg.com/@spiritov/ds.css/dist/widgets/ds-clock.js"></script>
 
+        <link rel="stylesheet" href="https://unpkg.com/@spiritov/ds.css" />
         <link href="./style/style.css" rel="stylesheet" />
-        <script src="stuff.js"></script>
+        <link href="./style/backtotop.css" rel="stylesheet" />
+        <link href="./style/title.css" rel="stylesheet" />
     </head>
 
-    <body
-        onload="
-            loadPath();
-            setupBackToTop();
-            setupPivot();
-        "
-    >
-        <ol id="path" class="breadcrumb"></ol>
+    <body>
+        <ol id="path" class="breadcrumb" hidden></ol>
 
         <h6 class="title">lebao3105's website</h6>
         <ul class="nav nav-tabs" role="tablist"></ul>
 
-        <h6>
-            <em
-                >If you're visiting this site at night, sorry. WinStrap (which
-                is used to color the site) supports other themes, but I couldn't
-                switch to them somehow.</em
-            >
-        </h6>
+        <div class="top"></div>
 
-        <div class="top">
-            <p>
-                Hi and welcome to lebao3105.github.io!<br />
-                This is the front page of the site, tells about me and my
-                contents here.
-            </p>
-
-            <p>
-                I'm Le Bao Nguyen (Nguyen is the last name), a student+developer
-                from Viet Nam.
-                <br />
-                I was born in 2008.
-                <br />
-                I like technology, music, and sometimes writing stuff to keep
-                this page alive (while nobody even knows this exists).
-                <br />
-                My (contributed) softwares are normally not something too big,
-                or never reaches to its finish stage because of me developing it
-                <bold>alone</bold>.
-                <br />
-                There is no main language here. I work on many language, some
-                have their own version that are fine, some however do not.
-                Pretty much that I'm struggling here. You'll see some of my
-                projects using the link below.
-            </p>
-
-            <p>So what do we have here?</p>
-
-            <p>
-                Tutorials, announcements and my own opinion about things.<br />
-                My associated projects are here too.<br />
-                Also some other stuff? I don't know.<br />
-                All pages here are put into categories, accessible via tabs
-                above.
-                <br />
-            </p>
-
-            <p>
-                The page is not bug-free. There is no proper small screen
-                support (yet?).<br />
-                If you found any weird things, you can notify me via the
-                repository's issues
-                <a
-                    href="https://github.com/lebao3105/lebao3105.github.io/issues"
-                    >tracker</a
-                >.<br />
-                Thank you for visiting!
-            </p>
+        <div class="flex place-content-center">
+            <ds-clock></ds-clock>
+            <ds-calendar></ds-calendar>
         </div>
+
+        <script type="module">
+            import { loadPath, setupBackToTop, setupPivot } from "./js/init.js"
+            loadPath();
+            setupBackToTop();
+            setupPivot();
+            window.onpopstate = (event) => {
+                console.log(event.state)
+            };
+        </script>
     </body>
 </html>
