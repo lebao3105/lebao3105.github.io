@@ -4,7 +4,8 @@ on:
   push:
     paths-ignore:
       - README.md
-      - .git*
+      - .gitignore
+      - .gitattributes
       - .editorconfig
 
   workflow_dispatch:
@@ -41,8 +42,6 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Build
-        env:
-          CMAKE_TOOLCHAIN_FILE: '${{env.EM_CACHE_DIR}}/emsdk-main/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake'
         run: |
-            cmake -B build
+            emcmake cmake -B build
             cmake --build build -- VERBOSE=1
