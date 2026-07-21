@@ -76,6 +76,8 @@ function createTabItem(val) {
     label.setAttribute("data-toggle", "tab");
     label.onclick = () => {
         history.pushState(val, "", val);
+        let evt = new Event('popstate', { state: val });
+        window.dispatchEvent(evt);
         document.getElementsByClassName("active")[0].classList.remove("active");
         label.classList.add("active");
     };
