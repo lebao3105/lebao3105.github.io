@@ -14,8 +14,6 @@ or never reaches to its finish stage because of me developing it
 
 There is no main language here. I work on many language, some
 have their own version that are fine, some however do not.
-Pretty much that I'm struggling here. You'll see some of my
-projects using the link below.
 
 # What this page has?
 

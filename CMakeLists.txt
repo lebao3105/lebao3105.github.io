@@ -11,15 +11,14 @@ add_executable(website
 set_target_properties(website
     PROPERTIES
         OUTPUT_NAME                 "siteInit"
-        SUFFIX                      ".wasm"
+        SUFFIX                      ".js"
         RUNTIME_OUTPUT_DIRECTORY    "${CMAKE_SOURCE_DIR}/js/"
 )
-add_compile_options(
+target_link_options(website PRIVATE
     -lembind
     -fwasm-exceptions
-    -sMODULARIZE
     -sASSERTIONS
-    --preload-file content@/content
+    --preload-file "${CMAKE_SOURCE_DIR}/content@/content"
     --closure 0
     --emit-symbol-map
 )

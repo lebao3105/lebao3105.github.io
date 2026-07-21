@@ -49,12 +49,10 @@ val lineParser(const std::string &line)
         isInParagraph = false;
     }
     else if (!isInParagraph) {
-        result = createElement("div");
-        // appendChild(contentDiv, elm);
-        // isInParagraph = true;
+        result = createElement("p");
     }
     else {
-        result = createTextNode(line);
+        result = createTextNode(line + " ");
     }
 
     return result;
@@ -62,7 +60,6 @@ val lineParser(const std::string &line)
 
 void addPageContent()
 {
-    val elm;
     val contentDiv =
         document.call<val>("getElementsByClassName", "top"s)
                 .call<val>("item", 0);
@@ -82,10 +79,11 @@ void addPageContent()
 
     std::stringstream ss;
     ss << f.rdbuf();
+    val elm;
     for (std::string line; std::getline(ss, line); /* nothing */)
     {
         trimString(line);
-        if (line.empty()) {
+        if (line.empty() && elm != val::undefined()) {
             appendChild(elm, createElement("br"));
             continue;
         }
@@ -106,7 +104,12 @@ void addPageContent()
         val newElm = lineParser(line);
         if (!isInParagraph) {
             appendChild(contentDiv, newElm);
-            elm = newElm;
+
+            // Avoid adding paragraphs to headers
+            if (line[0] != '#') {
+                elm = newElm;
+                isInParagraph = true;
+            }
         }
         else {
             appendChild(elm, newElm);
