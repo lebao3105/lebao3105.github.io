@@ -11,8 +11,9 @@ target("website")
     set_targetdir("js")
 
     add_files("js/*.cxx")
-    add_cxxflags("-sMODULARIZE", "--closure 0", "--emit-symbol-map")
+    add_cxxflags("--closure 0", "--emit-symbol-map")
     add_cxxflags("-sASSERTIONS", "-fwasm-exceptions", "-lembind")
     add_packages("emscripten")
     add_includedirs("js")
     add_values("wasm.preloadfiles", "content@/content")
+

@@ -4,14 +4,17 @@
 .xmake/
 .cache/
 build/
+bazel-*/
 
 a.out*
 *.wasm
 site*.js
+*.symbols
+*.dylib
 *.exe
 *.o
 *.ppu
-*.so.*
+*.so*
 *.a
 *.lib
 compile_commands.json
