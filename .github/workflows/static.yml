@@ -2,8 +2,6 @@ name: Publish page
 
 on:
   push:
-    branches:
-      - main
     paths-ignore:
       - README.md
       - .git*
@@ -28,12 +26,14 @@ env:
   EM_CACHE_DIR: 'em-cache'
 
 jobs:
+  build:
+    uses: lebao3105/lebao3105.github.io/.github/workflows/ci.yml@feat/wasm
+
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    uses: lebao3105/lebao3105.github.io/.github/workflows/ci.yml@feat/wasm
     steps:
 
       - name: Upload artifact
