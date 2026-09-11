@@ -1,15 +1,22 @@
-#include "siteContent.hxx"
-#include "utils.hxx"
+module;
+
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#ifdef __EMSCRIPTEN__
+#include <emscripten/val.h>
+#endif
 
+import Utilities;
+export module siteContent;
+
+#ifdef __EMSCRIPTEN__
 using namespace emscripten;
 using namespace std::literals::string_literals;
 
-val createSwitch(const std::string &name, const bool value)
+export val createSwitch(const std::string &name, const bool value)
 {
     val divCnt = createElement("div");
     val text = createTextNode(name);
@@ -30,7 +37,7 @@ val createSwitch(const std::string &name, const bool value)
 
 bool isInParagraph = false;
 
-val lineParser(const std::string &line)
+export val lineParser(const std::string &line)
 {
     val result;
 
@@ -58,7 +65,7 @@ val lineParser(const std::string &line)
     return result;
 }
 
-void addPageContent()
+export void addPageContent()
 {
     val contentDiv =
         document.call<val>("getElementsByClassName", "top"s)
@@ -116,3 +123,4 @@ void addPageContent()
         }
     }
 }
+#endif

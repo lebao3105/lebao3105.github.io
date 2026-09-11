@@ -1,36 +1,48 @@
-#include "utils.hxx"
-#include <cassert>
+module;
 
+#include <raylib.h>
+#include <string>
+#include <cassert>
+#include <algorithm>
+
+#ifdef __EMSCRIPTEN__
+#include <emscripten/val.h>
+#endif
+
+export module Utilities;
+
+#ifdef __EMSCRIPTEN__
 using namespace emscripten;
 
-val document = val::global("document");
-val window = val::global("window");
-val location = val::global("location");
+export val document = val::global("document");
+export val window = val::global("window");
+export Vector2 mousePos = {0, 0};
 
-val createElement(const std::string &name)
+export val createElement(const std::string &name)
 {
     assert(!name.empty());
     return document.call<val>("createElement", name);
 }
 
-val createTextNode(const std::string &content)
+export val createTextNode(const std::string &content)
 {
     assert(!content.empty());
     return document.call<val>("createTextNode", content);
 }
 
-void setAttribute(val what, const std::string &name, const std::string &value)
+export void setAttribute(val what, const std::string &name, const std::string &value)
 {
     assert(!name.empty());
     return what.call<void>("setAttribute", name, value);
 }
 
-void appendChild(val parent, const val &child)
+export void appendChild(val parent, const val &child)
 {
     return parent.call<void>("appendChild", child);
 }
+#endif
 
-void trimString(std::string &str)
+export void trimString(std::string &str)
 {
     str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](unsigned char ch) {
         return !std::isspace(ch);
@@ -39,3 +51,8 @@ void trimString(std::string &str)
         return !std::isspace(ch);
     }).base(), str.end());
 }
+
+export constexpr size_t defaultXMargin = 60;
+export constexpr size_t defaultYMargin = 10;
+export constexpr float defaultFontSize = 48.f;
+export constexpr std::string emptyString{};

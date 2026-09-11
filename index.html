@@ -3,7 +3,33 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>lebao3105's website</title>
+        <script type="module" src="https://unpkg.com/@spiritov/ds.css/dist/widgets/ds-calendar.js"></script>
+        <script type="module" src="https://unpkg.com/@spiritov/ds.css/dist/widgets/ds-clock.js"></script>
+
+        <link rel="stylesheet" href="https://unpkg.com/@spiritov/ds.css" />
+        <link href="./style/style.css" rel="stylesheet" />
+        <link href="./style/backtotop.css" rel="stylesheet" />
+    </head>
+
+    <body class="ds-css">
+        <div class="top">
+            <canvas id="canvas"></canvas>
+        </div>
+
+        <div class="flex place-content-center ds-grid"
+             style="padding: 16px">
+            <ds-clock></ds-clock>
+            <ds-calendar></ds-calendar>
+            <div class="pictochat-message">
+                <span>
+                    Made by lebao3105 with efforts<br>
+                    and many other great projects!<br>
+                    Source code and issue tracker can be found 
+                    <a href="https://github.com/lebao3105/lebao3105.github.io">here</a>.
+                </span>
+            </div>
+        </div>
+
         <script>
             Module = {
                 "printWithColors": false,
@@ -12,37 +38,29 @@
                         prefix = location.origin + '/js/';
                     }
                     return prefix + path;
-                }
+                },
+                "canvas": document.getElementById("canvas")
             }
+
+            var backToTop = document.createElement("a");
+            backToTop.id = "back-to-top";
+            backToTop.href = "#top";
+            backToTop.hidden = true;
+
+            var glyph = document.createElement("i");
+            glyph.classList.add("glyph");
+            glyph.classList.add("glyph-up");
+            backToTop.appendChild(glyph);
+            document.body.appendChild(backToTop);
+
+            function onViewportChange(_) {
+                console.log("window.pageYOffset = ", window.pageYOffset);
+                backToTop.hidden = window.pageYOffset < 150;
+            }
+
+            window.onscroll = onViewportChange;
+            window.onresize = onViewportChange;
         </script>
         <script async type="text/javascript" src="js/siteInit.js"></script>
-        <script type="module" src="https://unpkg.com/@spiritov/ds.css/dist/widgets/ds-calendar.js"></script>
-        <script type="module" src="https://unpkg.com/@spiritov/ds.css/dist/widgets/ds-clock.js"></script>
-
-        <link rel="stylesheet" href="https://unpkg.com/@spiritov/ds.css" />
-        <link href="./style/style.css" rel="stylesheet" />
-        <link href="./style/backtotop.css" rel="stylesheet" />
-        <link href="./style/title.css" rel="stylesheet" />
-    </head>
-
-    <body>
-        <ol id="path" class="breadcrumb" hidden></ol>
-
-        <h6 class="title">lebao3105's website</h6>
-        <ul class="nav nav-tabs" role="tablist"></ul>
-
-        <div class="top"></div>
-
-        <div class="flex place-content-center">
-            <ds-clock></ds-clock>
-            <ds-calendar></ds-calendar>
-        </div>
-
-        <script type="module">
-            import { loadPath, setupBackToTop, setupPivot } from "./js/init.js"
-            loadPath();
-            setupBackToTop();
-            setupPivot();
-        </script>
     </body>
 </html>

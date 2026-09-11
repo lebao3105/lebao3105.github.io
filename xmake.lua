@@ -1,19 +1,37 @@
 add_rules("mode.debug", "mode.release", "mode.releasedbg")
 add_rules("plugin.compile_commands.autoupdate")
-add_requires("emscripten")
+add_requires("raylib", "raylib-cpp")
+if is_plat("wasm") then
+    add_requires("emscripten")
+end
 set_policy("check.auto_ignore_flags", false)
 
 target("website")
     set_kind("binary")
-    set_plat("wasm")
     set_languages("cxx20")
-    set_filename("siteInit.wasm")
-    set_targetdir("js")
-
     add_files("js/*.cxx")
-    add_cxxflags("--closure 0", "--emit-symbol-map")
-    add_cxxflags("-sASSERTIONS", "-fwasm-exceptions", "-lembind")
-    add_packages("emscripten")
-    add_includedirs("js")
-    add_values("wasm.preloadfiles", "content@/content")
 
+    if is_plat("wasm") then
+        set_targetdir("js")
+        set_filename("siteInit.wasm")
+        add_cxxflags("-std=c++20")
+        add_ldflags(
+            "-lembind",
+            "-flto",
+            "-fwasm-exceptions",
+            "-sENVIRONMENT=web",
+            "-sASSERTIONS=1",
+            "--closure 1",
+            "--emit-symbol-map",
+
+            -- Required for using Raylib
+            "-sUSE_GLFW=3",
+            "-sEXPORTED_FUNCTIONS=['_main', '_malloc']",
+            "-sEXPORTED_RUNTIME_METHODS=ccall"
+        )
+        add_values("wasm.preloadfiles", "content@/content")
+        add_packages("emscripten")
+    end
+    add_defines("RAYLIB_CXX_INCLUDE=\"raylib-cpp/raylib-cpp.hpp\"")
+    add_packages("raylib", "raylib-cpp")
+    add_includedirs("js")
