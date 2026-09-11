@@ -5,10 +5,12 @@
 .cache/
 build/
 bazel-*/
+CMakePresets.json
 
 a.out*
 *.wasm
 site*.js
+*.data
 *.symbols
 *.dylib
 *.exe
