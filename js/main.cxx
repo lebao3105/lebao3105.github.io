@@ -119,7 +119,7 @@ int main(void) {
     // };
     
     // emscripten_fetch(&attr, "https://unpkg.com/@spiritov/ds.css/dist/assets/fonts/nitrods-font.ttf");
-    // emscripten_set_main_loop(UpdateDrawFrame, 0, 1);
+    emscripten_set_main_loop(UpdateDrawFrame, 0, 1);
     // UnloadFont(NitroDSFont);
 #else
     while (! window.ShouldClose()) {

@@ -43,5 +43,5 @@ jobs:
 
       - name: Build
         run: |
-            emcmake cmake -B build
+            emcmake cmake -B build -G Ninja
             cmake --build build -- VERBOSE=1
