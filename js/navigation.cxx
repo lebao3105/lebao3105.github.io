@@ -5,8 +5,10 @@ module;
 #endif
 
 #include <algorithm>
-import Utilities;
+#include <string>
+
 export module Navigation;
+import Utilities;
 
 #ifndef __EMSCRIPTEN__
 std::string _currentDocDir = "/";

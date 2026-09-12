@@ -30,6 +30,10 @@
             </div>
         </div>
 
+        <a id="back-to-top" href="#top" hidden="true">
+            <i>UP</i>
+        </a>
+
         <script>
             Module = {
                 "printWithColors": false,
@@ -40,18 +44,9 @@
                     return prefix + path;
                 },
                 "canvas": document.getElementById("canvas")
-            }
+            };
 
-            var backToTop = document.createElement("a");
-            backToTop.id = "back-to-top";
-            backToTop.href = "#top";
-            backToTop.hidden = true;
-
-            var glyph = document.createElement("i");
-            glyph.classList.add("glyph");
-            glyph.classList.add("glyph-up");
-            backToTop.appendChild(glyph);
-            document.body.appendChild(backToTop);
+            var backToTop = document.getElementById("back-to-top");
 
             function onViewportChange(_) {
                 console.log("window.pageYOffset = ", window.pageYOffset);

@@ -7,6 +7,10 @@
 // #include <emscripten/fetch.h>
 #endif
 
+#ifdef _MSC_VER
+#pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
+#endif
+
 import Utilities;
 import Navigation;
 import MouseUtils;
@@ -16,8 +20,8 @@ constexpr auto title = "LEBAO3105'S WEBSITE";
 
 void DrawTitleBarItem(const std::string &name, const int &idx, size_t &xOffset, const size_t yOffset)
 {
-    size_t titleWidth = ::MeasureText(name.c_str(), defaultFontSize);
-    Rectangle btnBounds = { (float)xOffset, (float)yOffset, (float)titleWidth, defaultFontSize };
+    const size_t titleWidth = ::MeasureText(name.c_str(), defaultFontSize);
+    const Rectangle btnBounds = { (float)xOffset, (float)yOffset, (float)titleWidth, defaultFontSize };
     const bool collisioncheck = IsMouseOverRect(btnBounds);
 
     DrawText(name.c_str(), xOffset, yOffset, defaultFontSize,
@@ -81,7 +85,7 @@ int main(void) {
     const int screenWidth = document["documentElement"]["clientWidth"].as<int>();
     const int screenHeight = document["documentElement"]["clientHeight"].as<int>();
 #else
-    if (! ChangeDirectory(getenv("ROOT_DIR"))) {
+    if (! ChangeDirectory(getenv("SITE_ROOT_DIR"))) {
         TraceLog(LOG_ERROR, "Failed to change directory to ROOT_DIR (errno=%d)", errno);
         return 1;
     }

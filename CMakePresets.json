@@ -1,0 +1,36 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "Web",
+            "hidden": false,
+            "description": "Configure for Web platform",
+            "binaryDir": "${sourceDir}/build/cmake/Web",
+            "generator": "Ninja",
+            "cacheVariables": {
+                "PLATFORM": "Web",
+                "XREPO_PLATFORM": "wasm"
+            }
+        },
+        {
+            "name": "Non-WASM",
+            "hidden": false,
+            "description": "Configure for non-Web platform",
+            "binaryDir": "${sourceDir}/build/cmake/${hostSystemName}"
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "web",
+            "description": "",
+            "displayName": "",
+            "configurePreset": "Web"
+        },
+        {
+            "name": "noweb",
+            "description": "",
+            "displayName": "",
+            "configurePreset": "Non-WASM"
+        }
+    ]
+}

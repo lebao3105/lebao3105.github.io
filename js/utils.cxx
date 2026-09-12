@@ -16,7 +16,6 @@ using namespace emscripten;
 
 export val document = val::global("document");
 export val window = val::global("window");
-export Vector2 mousePos = {0, 0};
 
 export val createElement(const std::string &name)
 {
@@ -55,4 +54,4 @@ export void trimString(std::string &str)
 export constexpr size_t defaultXMargin = 60;
 export constexpr size_t defaultYMargin = 10;
 export constexpr float defaultFontSize = 48.f;
-export constexpr std::string emptyString{};
+export const std::string emptyString{};

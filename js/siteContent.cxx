@@ -9,8 +9,8 @@ module;
 #include <emscripten/val.h>
 #endif
 
-import Utilities;
 export module siteContent;
+import Utilities;
 
 #ifdef __EMSCRIPTEN__
 using namespace emscripten;

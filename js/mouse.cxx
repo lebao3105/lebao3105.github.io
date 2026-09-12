@@ -3,9 +3,12 @@ module;
 #include <raylib.h>
 #include <functional>
 #include <cassert>
+#include <string>
 
-import Utilities;
 export module MouseUtils;
+import Utilities;
+
+export Vector2 mousePos = { 0, 0 };
 
 export void UpdateMousePosition()
 {

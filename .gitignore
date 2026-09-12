@@ -3,9 +3,10 @@
 .idea/
 .xmake/
 .cache/
+.vs/
 build/
 bazel-*/
-CMakePresets.json
+CMakeUserPresets.json
 
 a.out*
 *.wasm

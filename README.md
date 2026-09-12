@@ -4,6 +4,14 @@ Thanks to the dev of this [page](https://wp-store.neocities.org/xaps), now I kno
 
 The production is live at https://lebao3105.github.io.
 
+## Building
+
+To ease compiling this project, partial non-web platforms support has been added.
+
+With CMake, new presets have been added - use one with `--preset` flag.
+
+With XMake, use `xmake f` to your linking then build. XMake will handle the rest.
+
 ## Content writing syntax
 (Not only for myself but for other readers too)
 

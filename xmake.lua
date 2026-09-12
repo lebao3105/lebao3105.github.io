@@ -5,11 +5,17 @@ if is_plat("wasm") then
     add_requires("emscripten")
 end
 set_policy("check.auto_ignore_flags", false)
+set_policy("build.c++.modules", true)
 
 target("website")
     set_kind("binary")
     set_languages("cxx20")
     add_files("js/*.cxx")
+
+    set_targetdir("$(builddir)/xmake")
+    set_objectdir("$(builddir)/xmake/.objs")
+    set_dependir("$(builddir)/xmake/.deps")
+    set_autogendir("$(builddir)/xmake/.gens")
 
     if is_plat("wasm") then
         set_targetdir("js")
