@@ -4,6 +4,7 @@ module;
 #include <functional>
 #include <cassert>
 #include <string>
+#include "macros.h"
 
 export module MouseUtils;
 import Utilities;
@@ -25,10 +26,13 @@ export bool IsMouseLeftClickedOnRect(const Rectangle &rect)
     return IsMouseOverRect(rect) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
 }
 
-export enum class MouseState {
+export enum class MouseState
+{
     None,
     Hovered,
     Clicked,
+
+    // "Toggled" is not a word here, it's for buttons
     ToggledOn,
     ToggledOff
 };
@@ -45,38 +49,43 @@ constexpr Color getButtonBackground(MouseState state)
     }
 }
 
-export struct Button {
-    Rectangle bounds; //< For the button ONLY, EXCLUDING the label!
+export struct UIButton {
+protected:
     MouseState state = MouseState::None;
+
+public:
+    Rectangle bounds; //< For the button ONLY, EXCLUDING the label!
     std::function<void()> onClick;
     std::string label;
-    bool isASwitch;
+
+    void MainLoop() {
+        HandleMouseEvents();
+        Draw();
+    }
 
     void HandleMouseEvents() {
         assert(onClick);
         assert(bounds.width > 0.f && bounds.height > 0.f);
 
-        if ((! isASwitch) && (! IsMouseOverRect(bounds))) {
+        if (! IsMouseOverRect(bounds)) {
             state = MouseState::None;
             return;
         }
 
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+        else if (!IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
         {
-            state = isASwitch
-                ? state == MouseState::ToggledOn
-                    ? MouseState::ToggledOff
-                    : MouseState::ToggledOn
-                : MouseState::Clicked;
-            onClick();
-        }
-        else if (! isASwitch)
             state = MouseState::Hovered;
+            return;
+        }
+
+        state = MouseState::Clicked;
+        onClick();
     }
 
     void Draw() {
         assert(bounds.width > 0.f && bounds.height > 0.f);
         assert(bounds.x >= 0.f && bounds.y >= 0.f);
+        assert(! label.empty());
 
         if (bounds.width == bounds.height) {
             TraceLog(LOG_WARNING, "Square button!?");
@@ -87,8 +96,9 @@ export struct Button {
         // something funny happens;)
 
         if (! label.empty()) {
-            const auto cl = label.c_str();
-            DrawText(cl, bounds.x - 10.f - MeasureText(cl, defaultFontSize), bounds.y, defaultFontSize, BLACK);
+            const auto *cl = label.c_str();
+            DrawText(cl, bounds.x - 10.f - MeasureText(cl, FONT_SZ(NORMAL)),
+                     bounds.y, FONT_SZ(NORMAL), BLACK);
         }
 
         // For toggle buttons, only ToggleOn and ToggleOff are accepted.
@@ -96,15 +106,38 @@ export struct Button {
         // However in HandleMouseEvents() states like Clicked are transformed into Toggle ones,
         // and under normal uses, it is enough.
         DrawRectangleRec(bounds, getButtonBackground(state));
+    }
+};
 
-        if (isASwitch) {
-            Rectangle bounds2 = {
-                bounds.x + (state != MouseState::ToggledOn ? 40.f : 0.f),
-                bounds.y,
-                bounds.width / 2,
-                bounds.height
-            };
-            DrawRectangleRec(bounds2, LIGHTGRAY);
+const std::string OnLabel = "On";
+const std::string OffLabel = "Off";
+
+export struct UISwitchButton : public UIButton
+{
+    void HandleMouseEvents() {
+        UIButton::HandleMouseEvents();
+
+        if (!IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+        {
+            state = state == MouseState::ToggledOn ?
+                MouseState::ToggledOff : MouseState::ToggledOn;
+            onClick();
         }
+    }
+
+    void Draw() {
+        label = state == MouseState::ToggledOn ? OnLabel : OffLabel;
+        UIButton::Draw();
+        Rectangle bounds2 = {
+            bounds.x + (state != MouseState::ToggledOn ? 40.f : 0.f),
+            bounds.y,
+            bounds.width / 2,
+            bounds.height
+        };
+        DrawRectangleRec(bounds2, LIGHTGRAY);
+    }
+
+    bool IsToggledOn() const {
+        return state == MouseState::ToggledOn;
     }
 };
