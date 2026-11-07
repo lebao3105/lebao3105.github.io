@@ -2,35 +2,38 @@
     "version": 3,
     "configurePresets": [
         {
+            "name": "Default",
+            "hidden": false,
+            "binaryDir": "${sourceDir}/build/cmake/${hostSystemName}",
+            "cacheVariables": {
+                "CMAKE_CXX_STANDARD": "20",
+                "CMAKE_CXX_STANDARD_REQUIRED": true
+            }
+        },
+        {
             "name": "Web",
             "hidden": false,
             "description": "Configure for Web platform",
             "binaryDir": "${sourceDir}/build/cmake/Web",
-            "generator": "Ninja",
             "cacheVariables": {
                 "PLATFORM": "Web",
-                "XREPO_PLATFORM": "wasm"
+                "XREPO_PLATFORM": "wasm",
+                "WASM": true,
+                "CMAKE_TOOLCHAIN_FILE": "$env{EMSDK}/cmake/Modules/Platform/Emscripten.cmake"
             }
         },
         {
-            "name": "Non-WASM",
+            "name": "PlayStation Vita",
             "hidden": false,
-            "description": "Configure for non-Web platform",
-            "binaryDir": "${sourceDir}/build/cmake/${hostSystemName}"
-        }
-    ],
-    "buildPresets": [
-        {
-            "name": "web",
-            "description": "",
-            "displayName": "",
-            "configurePreset": "Web"
-        },
-        {
-            "name": "noweb",
-            "description": "",
-            "displayName": "",
-            "configurePreset": "Non-WASM"
+            "inherits": ["Default"],
+            "cacheVariables": {
+                "CMAKE_TOOLCHAIN_FILE": "$ENV{VITASDK}/share/vita.toolchain.cmake",
+                "VITA": true,
+                "VITA_APP_NAME": "lebao3105's website",
+                "VITA_TITLEID": "310500001",
+                "VITA_VERSION": "03.00",
+                "XREPO_PACKAGE_DISABLE": true
+            }
         }
     ]
 }
