@@ -42,7 +42,7 @@ constexpr Color getButtonBackground(MouseState state)
     switch (state) {
         case MouseState::None: return LIGHTGRAY;
         case MouseState::Hovered: return GRAY;
-        case MouseState::Clicked: return DARKGRAY;
+        case MouseState::Clicked: return RED;
         case MouseState::ToggledOn: return GREEN;
         case MouseState::ToggledOff: return RED;
         default: return LIGHTGRAY;
@@ -72,7 +72,7 @@ public:
             return;
         }
 
-        else if (!IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+        else if (! IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
         {
             state = MouseState::Hovered;
             return;

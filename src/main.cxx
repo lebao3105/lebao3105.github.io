@@ -76,7 +76,7 @@ void UpdateDrawFrame()
 {
     #ifdef __EMSCRIPTEN__
     if (GetMouseWheelMove() > 0.f)
-        Browser.window["onscroll"].call<void>();
+        Browser::window.call<void>("onscroll");
     #endif
     UpdateMousePosition();
 
@@ -90,21 +90,6 @@ void UpdateDrawFrame()
             #endif
         );
         DrawTitleBar();
-
-        // UIButton b;
-        // b.bounds = { .x = MARGIN_TYPE(NORMAL_X) + 100, .y = MARGIN_TYPE(NORMAL_Y) + 40, .width = 60, .height = 10},
-        // b.onClick = []() { TraceLog(LOG_DEBUG, "Mèo méo meo mèo meo"); };
-        // b.label = "LKDFJDLKFJSLKFS";
-        // b.MainLoop();
-
-        // UIList<4> l = { .items = {"Hello", "world", "1234", "5678"} };
-        // l.Render(MARGIN_TYPE(NORMAL_X), MARGIN_TYPE(NORMAL_Y) + 50);
-
-        // for (int i = 0; i < 6; i++)
-        // {
-        //     DrawText("Title", MARGIN_TYPE(NORMAL_X), MARGIN_TYPE(NORMAL_Y) + (FONT_SZ(TITLE6) + MARGIN_TYPE(HEADERS_Y)) * i,
-        //               FONT_SZ(TITLE6) + 2 * i, BLACK);
-        // }
     }
     EndDrawing();
 }
@@ -113,8 +98,8 @@ int main(void) {
     SetTraceLogLevel(LOG_DEBUG);
 
 #ifdef __EMSCRIPTEN__
-    const int screenWidth = document["documentElement"]["clientWidth"].as<int>();
-    const int screenHeight = document["documentElement"]["clientHeight"].as<int>();
+    const unsigned screenWidth = Browser::document["documentElement"]["clientWidth"].as<int>();
+    const unsigned screenHeight = Browser::document["documentElement"]["clientHeight"].as<int>();
 #else
     const char *envvar = getenv("SITE_ROOT_DIR");
     if (! ChangeDirectory(envvar && strlen(envvar) > 0 ? envvar : "/content")) {
@@ -122,8 +107,8 @@ int main(void) {
         return 1;
     }
     
-    constexpr int screenWidth = 1024;
-    constexpr int screenHeight = 768;
+    constexpr unsigned screenWidth = 1024;
+    constexpr unsigned screenHeight = 768;
 #endif
 
     int idx = 1;
