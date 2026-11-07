@@ -3,46 +3,48 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script type="module" src="https://unpkg.com/@spiritov/ds.css/dist/widgets/ds-calendar.js"></script>
-        <script type="module" src="https://unpkg.com/@spiritov/ds.css/dist/widgets/ds-clock.js"></script>
-
-        <link rel="stylesheet" href="https://unpkg.com/@spiritov/ds.css" />
-        <link href="./style/style.css" rel="stylesheet" />
-        <link href="./style/backtotop.css" rel="stylesheet" />
+        <style>
+            #canvas {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                margin: 0px;
+                border: 0;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                display: block;
+            }
+        </style>
     </head>
 
-    <body class="ds-css">
-        <div class="top">
-            <canvas id="canvas"></canvas>
-        </div>
-
-        <div class="flex place-content-center ds-grid"
-             style="padding: 16px">
-            <ds-clock></ds-clock>
-            <ds-calendar></ds-calendar>
-            <div class="pictochat-message">
-                <span>
-                    Made by lebao3105 with efforts<br>
-                    and many other great projects!<br>
-                    Source code and issue tracker can be found 
-                    <a href="https://github.com/lebao3105/lebao3105.github.io">here</a>.
-                </span>
-            </div>
-        </div>
-
-        <a id="back-to-top" href="#top" hidden="true">
-            <i>UP</i>
-        </a>
+    <body>
+        <canvas id="canvas" oncontextmenu="event.preventDefault();"></canvas>
 
         <script>
-            Module = {
-                "printWithColors": false,
-                "locateFile": function(path, prefix) {
-                    if (prefix === '') {
-                        prefix = location.origin + '/js/';
+            // Credit: W3School
+            function getCookie(cname) {
+                let name = cname + "=";
+                let decodedCookie = decodeURIComponent(document.cookie);
+                let ca = decodedCookie.split(';');
+
+                for(let i = 0; i <ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
                     }
-                    return prefix + path;
-                },
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+
+            console.debug(getCookie("noCookieMsg"))
+            document.getElementById("cookieMsg").hidden =
+                getCookie("noCookieMsg") === "true";
+
+            Module = {
                 "canvas": document.getElementById("canvas")
             };
 
@@ -56,6 +58,6 @@
             window.onscroll = onViewportChange;
             window.onresize = onViewportChange;
         </script>
-        <script async type="text/javascript" src="js/siteInit.js"></script>
+        <script async type="text/javascript" src="siteInit.js"></script>
     </body>
 </html>
