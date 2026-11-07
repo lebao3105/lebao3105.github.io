@@ -1,0 +1,35 @@
+name: Setup environment for CI
+
+on:
+  workflow_call:
+    inputs:
+      platform:
+        required: true
+        type: string
+
+env:
+  EM_CACHE_DIR: 'em-cache'
+
+jobs:
+  setup:
+    runs-on: ${{ inputs.platform }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.x'
+
+      - name: Setup cache
+        id: cache-system-libraries
+        uses: actions/cache@v6
+        with:
+          path: ${{env.EM_CACHE_DIR}}
+          key: emsdk-${{ runner.os }}
+
+      - name: Setup Emscripten
+        uses: emscripten-core/setup-emsdk@v15
+        with:
+          actions-cache-folder: ${{ env.EM_CACHE_DIR }}-${{ runner.os }}

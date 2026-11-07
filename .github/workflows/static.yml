@@ -7,14 +7,7 @@ on:
       - .git*
       - .editorconfig
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
@@ -22,25 +15,45 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
-env:
-  EM_CACHE_DIR: 'em-cache'
-
 jobs:
   build:
-    uses: lebao3105/lebao3105.github.io/.github/workflows/ci.yml@feat/wasm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup environment
+        uses: ./.github/workflows/setup.yml
+        with:
+          platform: ${{ matrix.os }}
+
+      - name: Build (Web)
+        run: |
+          emcmake cmake -G Ninja --preset=Web -DXREPO_PACKAGE_DISABLE=ON
+          cmake --build build/cmake/Web
+
+      - name: Move to another directory
+        run: |
+          mkdir deploy
+          mv *.data *.js* *.symbols *.wasm index.html deploy/
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: ./deploy
 
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    
+    needs: build
+
     steps:
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

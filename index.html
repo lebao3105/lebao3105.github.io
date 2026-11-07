@@ -22,41 +22,9 @@
         <canvas id="canvas" oncontextmenu="event.preventDefault();"></canvas>
 
         <script>
-            // Credit: W3School
-            function getCookie(cname) {
-                let name = cname + "=";
-                let decodedCookie = decodeURIComponent(document.cookie);
-                let ca = decodedCookie.split(';');
-
-                for(let i = 0; i <ca.length; i++) {
-                    let c = ca[i];
-                    while (c.charAt(0) == ' ') {
-                        c = c.substring(1);
-                    }
-                    if (c.indexOf(name) == 0) {
-                        return c.substring(name.length, c.length);
-                    }
-                }
-                return "";
-            }
-
-            console.debug(getCookie("noCookieMsg"))
-            document.getElementById("cookieMsg").hidden =
-                getCookie("noCookieMsg") === "true";
-
             Module = {
                 "canvas": document.getElementById("canvas")
             };
-
-            var backToTop = document.getElementById("back-to-top");
-
-            function onViewportChange(_) {
-                console.log("window.pageYOffset = ", window.pageYOffset);
-                backToTop.hidden = window.pageYOffset < 150;
-            }
-
-            window.onscroll = onViewportChange;
-            window.onresize = onViewportChange;
         </script>
         <script async type="text/javascript" src="siteInit.js"></script>
     </body>

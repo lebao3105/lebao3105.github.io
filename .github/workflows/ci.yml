@@ -11,37 +11,50 @@ on:
   workflow_dispatch:
   workflow_call:
 
-env:
-  EM_CACHE_DIR: 'em-cache'
-
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build-cmake:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        # https://cmake.org/cmake/help/latest/variable/CMAKE_SYSTEM_NAME.html#variable:CMAKE_SYSTEM_NAME
+        include:
+          - plat-name: Linux
+            os: ubuntu-latest
+          - plat-name: Windows
+            os: windows-latest
+          - plat-name: Darwin
+            os: macos-latest
+    
+    runs-on: ${{ matrix.os }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v7
+      - name: Setup environment
+        uses: ./.github/workflows/setup.yml
         with:
-          python-version: '3.x'
-
-      - name: Setup cache
-        id: cache-system-libraries
-        uses: actions/cache@v5
-        with:
-          path: ${{env.EM_CACHE_DIR}}
-          key: ${{env.EM_VERSION}}-${{ runner.os }}
-
-      - name: Setup Emscripten
-        uses: emscripten-core/setup-emsdk@v15
-        with:
-          actions-cache-folder: ${{env.EM_CACHE_DIR}}
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
+          platform: ${{ matrix.os }}
+        
       - name: Build
         run: |
-            emcmake cmake -B build -G Ninja
-            cmake --build build
+          cmake -G Ninja --preset=Default -DXREPO_PACKAGE_DISABLE=ON
+          ninja -C build/cmake/${{ matrix.plat-name }}
+
+  build-xmake:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Setup environment
+        uses: ./.github/workflows/setup.yml
+        with:
+          platform: ${{ matrix.os }}
+
+      - name: Build (Web)
+        run: |
+          xmake f -y -vD -p wasm --toolchain=emcc
+          xmake b -vD
+        
+      - name: Build (native)
+        run: |
+          xmake f -c
+          xmake b -vD
